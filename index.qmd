@@ -38,7 +38,7 @@ p {
 # Como citar {-}  
 
 ***   
-<p>ONSV; UFPR (2024). Sinistralidade no Transporte de Cargas e de Passageiros nas Rodovias Federais. Observatório Nacional de Segurança Viária e Universidade Federal do Paraná. Disponível em: https://arthurnoguti.github.io/PRF_transpCarga_e_Passageiros/01_intro.html  
+<p>ONSV; UFPR (2024). Sinistralidade no Transporte de Cargas e de Passageiros nas Rodovias Federais. Observatório Nacional de Segurança Viária e Universidade Federal do Paraná. Disponível em: https://arthurnoguti.github.io/Sinistralidade-no-Transporte-de-Cargas-e-de-Passageiros-nas-Rodovias-Federais/  
 
 
 :::{layout-ncol="2"}
