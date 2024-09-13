@@ -49,34 +49,34 @@ url2023 <- "https://github.com/ONSV/prfdata/raw/main/data-raw/acidentes2023.zip"
 #download.file(url2022, "acidentes2022.zip")
 #download.file(url2023, "acidentes2023.zip")
 
-#unzip(zipfile = "data-raw/acidentes2011.zip")
-#unzip(zipfile = "data-raw/acidentes2012.zip")
-#unzip(zipfile = "data-raw/acidentes2013.zip")
-#unzip(zipfile = "data-raw/acidentes2014.zip")
-#unzip(zipfile = "data-raw/acidentes2015.zip")
-#unzip(zipfile = "data-raw/acidentes2016_atual.zip")
-#unzip(zipfile = "data-raw/acidentes2017.zip")
-#unzip(zipfile = "data-raw/acidentes2018.zip")
-#unzip(zipfile = "data-raw/acidentes2019.zip")
-#unzip(zipfile = "data-raw/acidentes2020.zip")
-#unzip(zipfile = "data-raw/acidentes2021.zip")
-#unzip(zipfile = "data-raw/acidentes2022.zip")
-#unzip(zipfile = "data-raw/acidentes2023.zip")
+unzip(zipfile = "data-raw/acidentes2011.zip")
+unzip(zipfile = "data-raw/acidentes2012.zip")
+unzip(zipfile = "data-raw/acidentes2013.zip")
+unzip(zipfile = "data-raw/acidentes2014.zip")
+unzip(zipfile = "data-raw/acidentes2015.zip")
+unzip(zipfile = "data-raw/acidentes2016_atual.zip")
+unzip(zipfile = "data-raw/acidentes2017.zip")
+unzip(zipfile = "data-raw/acidentes2018.zip")
+unzip(zipfile = "data-raw/acidentes2019.zip")
+unzip(zipfile = "data-raw/acidentes2020.zip")
+unzip(zipfile = "data-raw/acidentes2021.zip")
+unzip(zipfile = "data-raw/acidentes2022.zip")
+unzip(zipfile = "data-raw/acidentes2023.zip")
 
 
-acidentes2011 <- read.csv("data-raw/acidentes2011.csv")
-acidentes2012 <- read.csv("data-raw/acidentes2012.csv")
-acidentes2013 <- read.csv("data-raw/acidentes2013.csv")
-acidentes2014 <- read.csv("data-raw/acidentes2014.csv")
-acidentes2015 <- read.csv("data-raw/acidentes2015.csv")
-acidentes2016 <- read.csv("data-raw/acidentes2016_atual.csv", sep = ";")
-acidentes2017 <- read.csv("data-raw/acidentes2017.csv", sep = ";")
-acidentes2018 <- read.csv("data-raw/acidentes2018.csv", sep = ";")
-acidentes2019 <- read.csv("data-raw/acidentes2019.csv", sep = ";")
-acidentes2020 <- read.csv("data-raw/acidentes2020.csv", sep = ";")
-acidentes2021 <- read.csv("data-raw/acidentes2021.csv", sep = ";")
-acidentes2022 <- read.csv("data-raw/acidentes2022.csv", sep = ";")
-acidentes2023 <- read.csv("data-raw/acidentes2023.csv", sep = ";")
+acidentes2011 <- read.csv("acidentes2011.csv")
+acidentes2012 <- read.csv("acidentes2012.csv")
+acidentes2013 <- read.csv("acidentes2013.csv")
+acidentes2014 <- read.csv("acidentes2014.csv")
+acidentes2015 <- read.csv("acidentes2015.csv")
+acidentes2016 <- read.csv("acidentes2016_atual.csv", sep = ";")
+acidentes2017 <- read.csv("acidentes2017.csv", sep = ";")
+acidentes2018 <- read.csv("acidentes2018.csv", sep = ";")
+acidentes2019 <- read.csv("acidentes2019.csv", sep = ";")
+acidentes2020 <- read.csv("acidentes2020.csv", sep = ";")
+acidentes2021 <- read.csv("acidentes2021.csv", sep = ";")
+acidentes2022 <- read.csv("acidentes2022.csv", sep = ";")
+acidentes2023 <- read.csv("acidentes2023.csv", sep = ";")
 
 
 # AJUSTANDO AS CLASSIFICAÇÕES DAS VARIÁVEIS E CRIANDO UM DATAFRAME GERAL ####
@@ -1561,5 +1561,5 @@ fviz_dend(distancia.hc_pass_pista, k = 6, rect = TRUE, cex = 0.5)
 
 [^1]: BRASIL. Polícia Federal Rodoviária. **Institucional**. Disponível em: https://www.gov.br/prf/pt-br/acesso-a-informacao/institucional. Acesso em: 20 de agosto. 2024.        
 
-[^2]: NGUYEN, Brian. **Multivariate Statistical Analysis with R: PCA & Friends making a Hotdog**. 2020. Disponível em:  https://bookdown.org/brian_nguyen0305/Multivariate_Statistical_Analysis_with_R/what-is-pca.html. Acesso em: 21 de agosto. 2024.  
+[^2]: BRASIL. Polícia Federal Rodoviária. **Dados Abertos da PRF**. Disponível em: https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abertos-da-prf. Acesso em: 13 de setembro. 2024.  
 
