@@ -22,6 +22,7 @@ p {
   * Sexta-feira entre 16 e 17 h é o período com maior quantidade de sinistros no Transporte de Cargas;  
   * Segunda-feira entre 7 e 8 h é o período com maior ocorrência de sinistros no Transporte de Passageiros;  
   * Tanto para o Transporte de Cargas quanto para o Transporte de Passageiros as principais vítimas foram homens na faixa etária entre 20 e 40 anos;  
+  * A partir de 2014, foi implantado o e-DAT (Declaração de Acidentes de Trânsito), onde sinistros sem vítimas não eram mais registrados pela PRF e deveriam ser realizados pelos próprios condutores (exceto alguns casos que serão discorridos no relatório);
   * Para ambos modos de transportes, o grupo etário “jovem” apresentaram maior associação com o estado físico da vítima “ferido grave”;  
   * Para o Transporte de Cargas, sinistros com vítimas fatais apresentaram uma maior associação com a condição metereológica “Com chuva”;  
   * Para o Transporte de Passageiros, sinistros com vítimas fatais apresentaram uma maior associação com a fase do dia “Anoitecer”.  
@@ -37,7 +38,7 @@ p {
 # Como citar {-}  
 
 ***   
-<p>ONSV; UFPR (2024). Sinistralidade no Transporte de Cargas e de Passageiros nas Rodovias Federais. Observatório Nacional de Segurança Viária e Universidade Federal do Paraná. Disponível em: https://arthurnoguti.github.io/Sinistralidade-no-Transporte-de-Cargas-e-de-Passageiros-nas-Rodovias-Federais/  
+<p>ONSV; UFPR (2024). Sinistralidade no Transporte de Cargas e de Passageiros nas Rodovias Federais. Observatório Nacional de Segurança Viária e Universidade Federal do Paraná. Disponível em: https://onsv.github.io/Transporte-de-Cargas-e-de-Passageiros-nas-Rodovias-Federais/  
 
 
 :::{layout-ncol="2"}

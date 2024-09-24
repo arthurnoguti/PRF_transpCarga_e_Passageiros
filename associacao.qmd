@@ -1,0 +1,623 @@
+<style>
+p {
+  text-align: justify;  
+  text-indent: 20px;   
+}
+</style>  
+
+# Associação entre as variáveis do sinistro   
+
+***  
+
+```{r, include=FALSE}
+
+source("script-part1.R")
+
+```
+
+```{r, include=FALSE}
+chisq.test(carg_sin$sexo, carg_sin$estado_fisico)
+chisq.test(carg_sin$idade, carg_sin$estado_fisico)
+
+# CONDUTORES TRANSPORTE DE CARGA ####
+condutores_carga <- carg_sin[,c("sexo",
+                                "idade",
+                                "estado_fisico",
+                                "tipo_envolvido",
+                                "ano")] %>% 
+  filter(tipo_envolvido == "Condutor" &
+           ano == c("2019","2020","2021","2022","2023"))
+
+condutores_carga <- condutores_carga[,c(-4,-5)]
+
+condutores_carga$idade [condutores_carga$idade >= 60] <- "idoso"
+condutores_carga$idade [condutores_carga$idade >= 30 & condutores_carga$idade < 60] <- "adulto"
+condutores_carga$idade [condutores_carga$idade >= 18 & condutores_carga$idade < 30] <- "jovem"
+condutores_carga$idade [condutores_carga$idade < 18] <- NA
+condutores_carga$idade [condutores_carga$idade == 7 |
+                        condutores_carga$idade == 8 |
+                        condutores_carga$idade == 9] <- NA
+
+condutores_carga$sexo[condutores_carga$sexo == "ignorado"] <- NA
+condutores_carga$estado_fisico[condutores_carga$estado_fisico == "ignorado"] <- NA
+
+condutores_carga <- na.omit(condutores_carga)
+```
+
+<p>Para essas análises, também foram considerado apenas os anos de 2019 até 2023. Para a verificação da associação entre as variáveis da base de dados utilizou-se primeiramente o teste do qui-quadrado. Para isso, as variáveis quantitativas foram convertidas em variáveis qualitativas categóricas. A associação entre as seguintes variáveis resultou estatistiamente significativa a um nível de confiança de 95%:  
+	
+  * Estado físico e Idade;    
+  * Estado físico e Sexo;  
+  * Classificação do sinistro e Condição metereológica;  
+  * Classificação do sinistro e Fase do dia;
+  * Classificação do sinistro e Tipo de pista;
+  * Classificação do sinistro e Traçado da via;  
+
+```{r, warning=FALSE, include=FALSE}
+chisq.test(condutores_carga$estado_fisico, condutores_carga$idade)
+```  
+
+
+<p>Tendo em vista a existência dessa  associação, de maneira complementar foi utilizado o método estatístico de Análise de Correspondência (ANACOR) para analisar as categorias de cada variável que contribuem para esta associação. A ANACOR permite a elaboração do mapa perceptual, em que as categorias das variáveis são plotadas segundo duas dimensões. Aquelas categorias mais próximas umas das outras representam um maior nível de associação. 
+<p> Na sequência, para facilitar a identificação das categorias mais próximas no mapa perceptual, foi utilizado o método de clusterização para gerar grupos (clusters) com as categorias que possuíam maior associação entre si.  
+
+## Estado físico da vítima *x* Características da vítima   
+<p>Essa seção trata da análise da associação entre a variável "Estado físico" e as variáveis relacionadas às características das vítimas (sexo e idade).  
+
+```{r, include=FALSE}
+library('tidyverse')
+library('FactoMineR')
+library('factoextra')
+library(onsvplot)
+
+# Número de Dim = Num de Categorias - Num de variáveis
+cond_mca_carga <- MCA(condutores_carga, ncp = 6, graph = FALSE)
+
+fviz_mca_biplot(cond_mca_carga, geom.ind = "none")
+
+cond_mca_carga$var$coord
+
+
+# CONDUTORES TRANSPORTE DE PASSAGEIROS ####
+condutores_pass <- pass_sin[,c("sexo",
+                                "idade",
+                                "estado_fisico",
+                                "tipo_envolvido",
+                               "ano")] %>% 
+  filter(tipo_envolvido == "Condutor" &
+           ano == c("2019","2020","2021","2022","2023"))
+
+condutores_pass <- condutores_pass[,c(-4,-5)]
+
+condutores_pass$idade [condutores_pass$idade >= 60] <- "idoso"
+condutores_pass$idade [condutores_pass$idade >= 30 & condutores_pass$idade < 60] <- "adulto"
+condutores_pass$idade [condutores_pass$idade >= 18 & condutores_pass$idade < 30] <- "jovem"
+condutores_pass$idade [condutores_pass$idade < 18] <- NA
+condutores_pass$idade [condutores_pass$idade == 7 |
+                          condutores_pass$idade == 8 |
+                          condutores_pass$idade == 9] <- NA
+
+condutores_pass$sexo [condutores_pass$sexo == "ignorado"] <- NA
+condutores_pass$estado_fisico [condutores_pass$estado_fisico == "ignorado"] <- NA
+
+
+condutores_pass <- na.omit(condutores_pass)
+
+# Número de Dim = Num de Categorias - Num de variáveis
+cond_mca_pass <- MCA(condutores_pass, ncp = 6, graph = FALSE)
+cond_mca_pass$eig
+
+fviz_mca_biplot(cond_mca_pass, geom.ind = "none", habillage = "estado_fisico")
+# condutores envolvidos com sinistros que tiveram ao menos 1 veiculo de transporte de carga ####
+id_carg <- carg_sin$id[!duplicated(carg_sin$id)]
+
+sin_com_carg <- (subset(acidentes_2011_2023, id %in% id_carg))
+
+sin_com_carg <- subset(sin_com_carg, tipo_envolvido == "Condutor" &  
+                         tipo_veiculo != "Caminh\xe3o" & 
+                         tipo_veiculo != "Caminh\xe3o-Trator" &
+                         tipo_veiculo != "Caminh\xe3o-trator" & 
+                         tipo_veiculo != "Caminh\xe3o-Tanque" &
+                         tipo_veiculo != "Reboque")
+
+# condutores envolvidos com sinistros que tiveram ao menos 1 veiculo de transporte de passageiros ####
+id_pass <- pass_sin$id[!duplicated(pass_sin$id)]
+
+sin_com_pass <- (subset(acidentes_2011_2023, id %in% id_pass))
+
+sin_com_pass <- subset(sin_com_pass, tipo_envolvido == "Condutor" &  
+                         tipo_veiculo != "\xd4nibus" & 
+                         tipo_veiculo != "Micro\xf4nibus"  
+)
+
+# CONDUTORES ENVOLVIDOS COM TRANSPORTE DE CARGA ####
+env_carga <- sin_com_carg[,c("sexo",
+                                "idade",
+                                "estado_fisico")] 
+
+env_carga$idade [env_carga$idade >= 60] <- "idoso"
+env_carga$idade [env_carga$idade >= 30 & env_carga$idade < 60] <- "adulto"
+env_carga$idade [env_carga$idade >= 18 & env_carga$idade < 30] <- "jovem"
+env_carga$idade [env_carga$idade < 18] <- NA
+env_carga$idade [env_carga$idade == 7 |
+                   env_carga$idade == 8 |
+                   env_carga$idade == 9] <- NA
+
+env_carga$sexo [env_carga$sexo == "ignorado"] <- NA
+env_carga$estado_fisico [env_carga$estado_fisico == "ignorado"] <- NA
+
+env_carga <- na.omit(env_carga)
+
+# Número de Dim = Num de Categorias - Num de variáveis
+cond_mca_env_carga <- MCA(env_carga, ncp = 6, graph = FALSE)
+cond_mca_env_carga$eig
+
+fviz_mca_biplot(cond_mca_env_carga, geom.ind = "none", habillage = "estado_fisico")
+# ENVOLVIDOS COM TRANSPORTE DE PASSAGEIROS ####
+env_pass <- sin_com_pass[,c("sexo",
+                             "idade",
+                             "estado_fisico")] 
+
+env_pass$idade [env_pass$idade >= 60] <- "idoso"
+env_pass$idade [env_pass$idade >= 30 & env_pass$idade < 60] <- "adulto"
+env_pass$idade [env_pass$idade >= 18 & env_pass$idade < 30] <- "jovem"
+env_pass$idade [env_pass$idade < 18] <- NA
+env_pass$idade [env_pass$idade == 7 |
+                   env_pass$idade == 8 |
+                   env_pass$idade == 9] <- NA
+
+env_pass$sexo [env_pass$sexo == "ignorado"] <- NA
+env_pass$estado_fisico [env_pass$estado_fisico == "ignorado"] <- NA
+
+env_pass <- na.omit(env_pass)
+
+# Número de Dim = Num de Categorias - Num de variáveis
+cond_mca_env_pass <- MCA(env_pass, ncp = 6, graph = FALSE)
+cond_mca_env_pass$eig
+
+fviz_mca_biplot(cond_mca_env_pass, geom.ind = "none", habillage = "estado_fisico")
+
+# Graficos ####
+fviz_mca_biplot(cond_mca_carga, geom.ind = "none")
+fviz_mca_biplot(cond_mca_pass, geom.ind = "none")
+fviz_mca_biplot(cond_mca_env_carga, geom.ind = "none")
+fviz_mca_biplot(cond_mca_env_pass, geom.ind = "none")
+
+df_cond_mca_carga <- (data.frame(cond_mca_carga$var$coord, variavel = c("sexo","sexo",
+                                                                        "idade","idade","idade",
+                                                                        "estado_fisico","estado_fisico",
+                                                                        "estado_fisico","estado_fisico")))
+df_cond_mca_pass <- (data.frame(cond_mca_pass$var$coord, variavel = c("sexo","sexo",
+                                                                        "idade","idade","idade",
+                                                                        "estado_fisico","estado_fisico",
+                                                                        "estado_fisico","estado_fisico")))
+df_cond_mca_env_carg <- (data.frame(cond_mca_env_carga$var$coord, variavel = c("sexo","sexo",
+                                                                      "idade","idade","idade",
+                                                                      "estado_fisico","estado_fisico",
+                                                                      "estado_fisico","estado_fisico")))
+df_cond_mca_env_pass <- (data.frame(cond_mca_env_pass$var$coord, variavel = c("sexo","sexo",
+                                                                               "idade","idade","idade",
+                                                                               "estado_fisico","estado_fisico",
+                                                                               "estado_fisico","estado_fisico")))
+
+# Clusterização #####
+# carga #####
+df_cond_mca_carga<- df_cond_mca_carga %>% 
+  mutate(Dim1_normalizada = (Dim.1-mean(Dim.1))/sd(Dim.1),
+         Dim2_normalizada = (Dim.2-mean(Dim.2))/sd(Dim.2))
+
+distancia_carg <- dist(df_cond_mca_carga[,c(8,9)], method = "euclidean")
+
+distancia.hc_carg <- hclust(d=distancia_carg, method="average")
+fviz_dend(distancia.hc_carg)
+# pass ####
+
+df_cond_mca_pass<- df_cond_mca_pass %>% 
+  mutate(Dim1_normalizada = (Dim.1-mean(Dim.1))/sd(Dim.1),
+         Dim2_normalizada = (Dim.2-mean(Dim.2))/sd(Dim.2))
+
+distancia_pass <- dist(df_cond_mca_pass[,c(8,9)], method = "euclidean")
+
+distancia.hc_pass <- hclust(d=distancia_pass, method="average")
+fviz_dend(distancia.hc_pass)
+
+# env carga ######
+df_cond_mca_env_carg<- df_cond_mca_env_carg %>% 
+  mutate(Dim1_normalizada = (Dim.1-mean(Dim.1))/sd(Dim.1),
+         Dim2_normalizada = (Dim.2-mean(Dim.2))/sd(Dim.2))
+
+distancia_env_carg <- dist(df_cond_mca_env_carg[,c(8,9)], method = "euclidean")
+
+distancia.hc_env_carg <- hclust(d=distancia_env_carg, method="average")
+fviz_dend(distancia.hc_env_carg)
+
+# env pass #####
+df_cond_mca_env_pass<- df_cond_mca_env_pass %>% 
+  mutate(Dim1_normalizada = (Dim.1-mean(Dim.1))/sd(Dim.1),
+         Dim2_normalizada = (Dim.2-mean(Dim.2))/sd(Dim.2))
+
+distancia_env_pass <- dist(df_cond_mca_env_pass[,c(8,9)], method = "euclidean")
+
+distancia.hc_env_pass <- hclust(d=distancia_env_pass, method="average")
+fviz_dend(distancia.hc_env_pass)
+``` 
+
+### Mapas perceptuais da ANCOR    
+
+::: panel-tabset  
+
+#### Transporte de Cargas  
+
+```{r, echo=FALSE}
+ggplot(data = df_cond_mca_carga, aes(x = Dim.1, y = Dim.2, color = variavel))+
+  geom_point()+
+  geom_label(label = rownames(df_cond_mca_carga))+
+  labs(x = "Dim1 (17.4%)", y = "Dim2 (17.2%)")+
+  geom_hline(yintercept = 0, colour = "black", lty="longdash") + 
+  geom_vline(xintercept = 0, colour = "black", lty="longdash") + 
+  theme_onsv()
+
+```
+
+#### Transporte de Passageiros   
+
+```{r, echo=FALSE}
+ggplot(data = df_cond_mca_pass, aes(x = Dim.1, y = Dim.2, color = variavel))+
+  geom_point()+
+  geom_label(label = rownames(df_cond_mca_pass))+
+  labs(x = "Dim1 (18.2%)", y = "Dim2 (17%)")+
+  geom_hline(yintercept = 0, colour = "black", lty="longdash") + 
+  geom_vline(xintercept = 0, colour = "black", lty="longdash") + 
+  theme_onsv()
+
+```  
+
+:::  
+
+### Clusterização das categorias     
+
+::: panel-tabset  
+
+#### Transporte de Cargas   
+
+```{r, echo=FALSE}
+fviz_dend(distancia.hc_carg, k = 4, rect = TRUE) 
+```
+
+#### Transporte de Passageiros  
+
+```{r, echo=FALSE}
+fviz_dend(distancia.hc_pass, k = 5, rect = TRUE) 
+```  
+
+:::     
+
+<p>A partir dos mapas perceptuais (seção 3.1.1) e dos clusters identificados (seção 3.1.2) foi possível verificar que para o Transporte de Cargas:
+
+  * A categoria "jovem" está mais associada ao estado físico "ferido grave" e "ferido leve";
+  * As categorias "masculino" e "adulto" estão mais associadas ao estado físico "ileso";
+  * A categoria "idoso está mais associada ao estado físico "morto";
+  * A categoria "feminino" não possui associação significativa com as outras categorias.  
+
+<p>Para o Transporte de Passageiros:
+
+  * A categoria "jovem" está mais associada ao estado físico "ferido grave";
+  * As categorias "masculino" e "adulto" estão mais associadas ao estado físico "ileso";
+  * A categoria "idoso está mais associada ao estado físico "ferido leve";
+  * As categorias "feminino" e "morto" não possuem associação significativa com as outras categorias. 
+  
+## Classificação do sinistro *x* Características ambientais  
+
+<p>Essa seção tem por objetivo avaliar a associação entre as classificações dos sinistros com características ambientais (condição meteorológica e fase do dia). Para facilitar a visualização do mapa perceptual, a quantidade de categorias da variável "condição meteorológica" foi reduzida, conforme descrito a seguir:  
+
+  * As categorias "Sol", "Céu Claro" e "Nublado" foram agregadas na categoria "sem chuva";
+  * As categorias "Chuva" e "Garoa/Chuvisco" foram agregadas na categoria "com chuva".
+  
+```{r, include=FALSE}
+library('tidyverse')
+library('FactoMineR')
+library('factoextra')
+
+chisq.test(carg11_23unique$tipo_pista, carg11_23unique$classificacao_acidente)
+chisq.test(carg11_23unique$condicao_metereologica, carg11_23unique$classificacao_acidente)
+chisq.test(carg11_23unique$fase_dia, carg11_23unique$classificacao_acidente)
+chisq.test(carg11_23unique$dia_semana, carg11_23unique$classificacao_acidente)
+chisq.test(carg11_23unique$uso_solo, carg11_23unique$classificacao_acidente)
+
+# Sinistros com transporte de carga-clima ####
+sinis_carga <- carg11_23unique[,c("classificacao_acidente",
+                                "fase_dia",
+                                "condicao_metereologica",
+                                "ano")] %>% 
+  filter(ano == c("2019","2020","2021","2022","2023"))
+
+sinis_carga <- sinis_carga[,-4] 
+
+sinis_carga$classificacao_acidente[sinis_carga$classificacao_acidente == "ignorado"] <- NA
+sinis_carga$condicao_metereologica[sinis_carga$condicao_metereologica == "Ignorado"] <- NA
+sinis_carga <- na.omit(sinis_carga)
+
+sinis_carga <- sinis_carga %>% 
+  mutate(condicao_metereologica = dplyr::recode(condicao_metereologica,
+                                    "Sol" = "sem chuva",
+                                    "Ceu Claro" = "sem chuva",
+                                    "Nublado" = "sem chuva",
+                                    "Chuva" = "com chuva",
+                                    "Garoa/Chuvisco" = "com chuva"))
+
+# Número de Dim = Num de Categorias - Num de variáveis
+mca_sinis_carga <- MCA(sinis_carga, ncp = 8 ,graph = FALSE)
+fviz_mca_biplot(mca_sinis_carga, geom.ind = "none")
+
+
+# Sinistros com transporte de carga-pista #### 
+sinis_carga2 <- carg11_23unique[,c("classificacao_acidente",
+                                  "tipo_pista",
+                                  "tracado_via",
+                                  "ano")] %>% 
+  filter(ano == c("2019","2020","2021","2022","2023"))
+
+sinis_carga2 <- sinis_carga2[,-4]
+
+sinis_carga2$classificacao_acidente[sinis_carga2$classificacao_acidente == "ignorado"] <- NA
+sinis_carga2$tracado_via[sinis_carga2$tracado_via == "Nao Informado"] <- NA
+sinis_carga2 <- na.omit(sinis_carga2)
+
+sinis_carga2 <- sinis_carga2 %>% 
+  mutate(tracado_via = dplyr::recode(tracado_via,
+                                                "Interseccao de vias" = "interseccao",
+                                                "Rotatoria" = "interseccao",
+                                                "Ponte" = "obra de arte",
+                                                "Tunel" = "obra de arte",
+                                                "Viaduto" = "obra de arte"
+                                                ))
+sinis_carga2 <- sinis_carga2 %>% 
+  mutate(tipo_pista = dplyr::recode(tipo_pista,
+                                     "dupla" = "dupla/multipla",
+                                     "multipla" = "dupla/multipla"
+  ))
+# Número de Dim = Num de Categorias - Num de variáveis
+mca_sinis_carga2 <- MCA(sinis_carga2, ncp = 8, graph = FALSE)
+fviz_mca_biplot(mca_sinis_carga2, geom.ind = "none")
+
+# Sinistros com transporte de passageiro-clima ####
+sinis_pass <- pass11_23unique[,c("classificacao_acidente",
+                                  "fase_dia",
+                                  "condicao_metereologica",
+                                 "ano")] %>% 
+  filter(ano == c("2019","2020","2021","2022","2023"))
+
+sinis_pass <- sinis_pass[,-4] 
+sinis_pass$classificacao_acidente[sinis_pass$classificacao_acidente == "ignorado"] <- NA
+sinis_pass$condicao_metereologica[sinis_pass$condicao_metereologica == "Ignorado"] <- NA
+sinis_pass <- na.omit(sinis_pass)
+
+sinis_pass <- sinis_pass %>% 
+  mutate(condicao_metereologica = dplyr::recode(condicao_metereologica,
+                                                "Sol" = "sem chuva",
+                                                "Ceu Claro" = "sem chuva",
+                                                "Nublado" = "sem chuva",
+                                                "Chuva" = "com chuva",
+                                                "Garoa/Chuvisco" = "com chuva"))
+
+# Número de Dim = Num de Categorias - Num de variáveis
+mca_sinis_pass <- MCA(sinis_pass, ncp = 10 ,graph = FALSE)
+fviz_mca_biplot(mca_sinis_pass, geom.ind = "none")
+
+
+# Sinistros com transporte de passageiro-pista #### 
+sinis_pass2 <- pass11_23unique[,c("classificacao_acidente",
+                                   "tipo_pista",
+                                   "tracado_via",
+                                  "ano")] %>% 
+  filter(ano == c("2019","2020","2021","2022","2023"))
+
+sinis_pass2 <- sinis_pass2[,-4]
+
+sinis_pass2$classificacao_acidente[sinis_pass2$classificacao_acidente == "ignorado"] <- NA
+sinis_pass2$tracado_via[sinis_pass2$tracado_via == "Nao Informado"] <- NA
+sinis_pass2 <- na.omit(sinis_pass2)
+
+sinis_pass2 <- sinis_pass2 %>% 
+  mutate(tracado_via = dplyr::recode(tracado_via,
+                                     "Interseccao de vias" = "interseccao",
+                                     "Rotatoria" = "interseccao",
+                                     "Ponte" = "obra de arte",
+                                     "Tunel" = "obra de arte",
+                                     "Viaduto" = "obra de arte"
+  ))
+sinis_pass2 <- sinis_pass2 %>% 
+  mutate(tipo_pista = dplyr::recode(tipo_pista,
+                                    "dupla" = "dupla/multipla",
+                                    "multipla" = "dupla/multipla"
+  ))
+# Número de Dim = Num de Categorias - Num de variáveis
+mca_sinis_pass2 <- MCA(sinis_pass2, ncp = 11, graph = FALSE)
+fviz_mca_biplot(mca_sinis_pass2, geom.ind = "none")
+
+
+# Graficos ####
+fviz_mca_biplot(mca_sinis_carga, geom.ind = "none")
+fviz_mca_biplot(mca_sinis_carga2, geom.ind = "none")
+fviz_mca_biplot(mca_sinis_pass, geom.ind = "none")
+fviz_mca_biplot(mca_sinis_pass2, geom.ind = "none")
+
+df_mca_sinis_carga <- (data.frame(mca_sinis_carga$var$coord, variavel = c("classificação sinistro","classificação sinistro","classificação sinistro",
+                                                                        "fase do dia","fase do dia","fase do dia","fase do dia",
+                                                                        "condição metereológica","condição metereológica","condição metereológica",
+                                                                        "condição metereológica"
+                                                                       )))
+df_mca_sinis_carga2 <- (data.frame(mca_sinis_carga2$var$coord, variavel = c("classificação sinistro","classificação sinistro","classificação sinistro",
+                                                                            "tipo pista","tipo pista",
+                                                                            "traçado via","traçado via","traçado via","traçado via",
+                                                                            "traçado via","traçado via")))
+df_mca_sinis_pass <- (data.frame(mca_sinis_pass$var$coord, variavel = c("classificação sinistro","classificação sinistro","classificação sinistro",
+                                                                          "fase do dia","fase do dia","fase do dia","fase do dia",
+                                                                          "condição metereológica","condição metereológica","condição metereológica",
+                                                                          "condição metereológica","condição metereológica","condição metereológica")))
+
+df_mca_sinis_pass2 <- (data.frame(mca_sinis_pass2$var$coord, variavel = c("classificação sinistro","classificação sinistro","classificação sinistro",
+                                                                            "tipo pista","tipo pista",
+                                                                            "traçado via","traçado via","traçado via","traçado via",
+                                                                            "traçado via","traçado via")))
+# Clusterização #####
+# carga-clima #####
+df_mca_sinis_carga<- df_mca_sinis_carga %>% 
+  mutate(Dim1_normalizada = (Dim.1-mean(Dim.1))/sd(Dim.1),
+         Dim2_normalizada = (Dim.2-mean(Dim.2))/sd(Dim.2))
+
+distancia_carg_clima <- dist(df_mca_sinis_carga[,c(8,9)], method = "euclidean")
+
+distancia.hc_carg_clima <- hclust(d=distancia_carg_clima, method="average")
+fviz_dend(distancia.hc_carg_clima)
+# carga-pista ####
+
+df_mca_sinis_carga2<- df_mca_sinis_carga2 %>% 
+  mutate(Dim1_normalizada = (Dim.1-mean(Dim.1))/sd(Dim.1),
+         Dim2_normalizada = (Dim.2-mean(Dim.2))/sd(Dim.2))
+
+distancia_carg_pista <- dist(df_mca_sinis_carga2[,c(8,9)], method = "euclidean")
+
+distancia.hc_carg_pista <- hclust(d=distancia_carg_pista, method="average")
+fviz_dend(distancia.hc_carg_pista)
+# passageiros-clima #####
+df_mca_sinis_pass<- df_mca_sinis_pass %>% 
+  mutate(Dim1_normalizada = (Dim.1-mean(Dim.1))/sd(Dim.1),
+         Dim2_normalizada = (Dim.2-mean(Dim.2))/sd(Dim.2))
+
+distancia_pass_clima <- dist(df_mca_sinis_pass[,c(8,9)], method = "euclidean")
+
+distancia.hc_pass_clima <- hclust(d=distancia_pass_clima, method="average")
+fviz_dend(distancia.hc_carg_clima)
+# passageiros-pista ####
+
+df_mca_sinis_pass2<- df_mca_sinis_pass2 %>% 
+  mutate(Dim1_normalizada = (Dim.1-mean(Dim.1))/sd(Dim.1),
+         Dim2_normalizada = (Dim.2-mean(Dim.2))/sd(Dim.2))
+
+distancia_pass_pista <- dist(df_mca_sinis_pass2[,c(8,9)], method = "euclidean")
+
+distancia.hc_pass_pista <- hclust(d=distancia_pass_pista, method="average")
+fviz_dend(distancia.hc_pass_pista)
+```
+
+### Mapas perceptuais da ANACOR   
+
+::: panel-tabset  
+
+#### Transporte de Cargas  
+
+```{r, echo=FALSE}
+ggplot(data = df_mca_sinis_carga, aes(x = Dim.1, y = Dim.2, color = variavel))+
+  geom_point()+
+  geom_label(label = rownames(df_mca_sinis_carga))+
+  labs(x = "Dim1 (14.3%)", y = "Dim2 (13.2%)")+
+  geom_hline(yintercept = 0, colour = "black", lty="longdash") + 
+  geom_vline(xintercept = 0, colour = "black", lty="longdash") + 
+  theme_onsv()
+
+```
+
+#### Transporte de Passageiros  
+
+```{r, echo=FALSE}
+ggplot(data = df_mca_sinis_pass, aes(x = Dim.1, y = Dim.2, color = variavel))+
+  geom_point()+
+  geom_label(label = rownames(df_mca_sinis_pass))+
+  labs(x = "Dim1 (12.9%)", y = "Dim2 (10.7%)")+
+  geom_hline(yintercept = 0, colour = "black", lty="longdash") + 
+  geom_vline(xintercept = 0, colour = "black", lty="longdash") + 
+  theme_onsv()
+```  
+
+:::  
+
+### Clusterização das categorias  
+
+::: panel-tabset  
+
+#### Transporte de Cargas 
+
+```{r, echo=FALSE}
+fviz_dend(distancia.hc_carg_clima, k = 4, rect = TRUE, cex = 0.5) 
+```
+
+#### Transporte de Passageiros  
+
+```{r, echo=FALSE}
+fviz_dend(distancia.hc_pass_clima, k = 6, rect = TRUE, cex = 0.5) 
+```
+  
+:::    
+
+<p>A partir dos mapas perceptuais (seção 3.2.1) e dos clusters identificados (seção 3.2.2) foi possível verificar que para o Transporte de Cargas:
+
+  * Sinistros com vítimas fatais estão mais associados com a condição metereológica "com chuva" e a fase do dia "pleno dia";
+  * Sinistros com vítimas feridas e sem vítimas estão mais associados a condição metereológica "sem chuva" e a fase do dia "anoitecer".  
+  
+<p>Já para o Transporte de Passageiros, sinistros com vítimas fatais estão mais associados com a fase do dia "Anoitecer" e sinistros com vítimas feridas estão mais associados com a fase do dia "Plena noite".
+
+  
+## Classificação do sinistro *x* Características viárias    
+
+<p>Essa seção tem por objetivo avaliar a associação entre as classificações dos sinistros com as características da viárias (tipo de pista e traçado da via).Para facilitar a visualização do mapa perceptual, a quantidade de categorias da variável "tipo de pista", sendo agregadas as categorias "dupla" e "múltipla" para uma categoria denominada "dupla/múltipla"; para a variável "traçado via" foram agregadas as seguintes categorias: 
+
+  * "Intersecção de vias" e "Rotatoria" foram agregadas na categoria "intersecção";
+  * "Ponte", "Túnel" e "Viaduto" foram agregadas na categoria "obra de arte".
+  
+### Mapas perceptuais da ANACOR  
+
+::: panel-tabset  
+
+#### Transporte de Cargas  
+
+```{r, echo=FALSE}
+ggplot(data = df_mca_sinis_carga2, aes(x = Dim.1, y = Dim.2, color = variavel))+
+  geom_point()+
+  geom_label(label = rownames(df_mca_sinis_carga2))+
+  labs(x = "Dim1 (14.6%)", y = "Dim2 (13.1%)")+
+  geom_hline(yintercept = 0, colour = "black", lty="longdash") + 
+  geom_vline(xintercept = 0, colour = "black", lty="longdash") + 
+  theme_onsv()
+```
+
+#### Transporte de Passageiros  
+
+```{r, echo=FALSE}
+ggplot(data = df_mca_sinis_pass2, aes(x = Dim.1, y = Dim.2, color = variavel))+
+  geom_point()+
+  geom_label(label = rownames(df_mca_sinis_pass2))+
+  labs(x = "Dim1 (15.4%)", y = "Dim2 (13.3%)")+
+  geom_hline(yintercept = 0, colour = "black", lty="longdash") + 
+  geom_vline(xintercept = 0, colour = "black", lty="longdash") + 
+  theme_onsv()
+
+```  
+
+:::  
+
+### Clusterização das categorias   
+
+::: panel-tabset  
+
+#### Transporte de Cargas 
+
+```{r, echo=FALSE}
+fviz_dend(distancia.hc_carg_pista, k = 8, rect = TRUE, cex = 0.5)
+```  
+
+#### Transporte de Passageiros 
+
+```{r, echo=FALSE}
+fviz_dend(distancia.hc_pass_pista, k = 6, rect = TRUE, cex = 0.5) 
+```  
+
+:::  
+
+<p> A partir dos mapas perceptuais e da clusterização, foi possível verificar que para o Transporte de Cargas, sinistros com vítimas fatais estão mais associados o traçado "interseção", enquanto sinistros com vítimas feridas e sem vítimas estão mais associados com o traçado da via "Reta".
+<p>Para o Transporte de Passageiros tem-se que:
+
+  * Sinistros com vítimas fatais estão mais associados com o traçado da via "intersecção";
+  * Sinistros com vítimas feridas estão mais associados com o traçado da via "Reta";
+  * Sinistros sem vítimas estão mais associados com o tipo de pista "Simples".  
+  

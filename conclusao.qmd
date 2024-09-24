@@ -1,0 +1,30 @@
+<style>
+p {
+  text-align: justify;  
+  text-indent: 20px;   
+}
+</style>  
+
+# Conclusão {-}
+
+***  
+
+<p>Como análise geral da sinistralidade no Transporte de Cargas e de Passageiros nas rodovias federais brasileiras tem-se que:
+
+  * Em comparação entre 2011 e 2023 houve uma redução na quantidade de sinistros em ambos; 
+  * Houve uma maior incidência de sinistros nos dias úteis entre os horários de 6h às 20h;
+  * A proporção do sexo masculino envolvido em sinistros com o Transporte de Cargas e de Passageiros é superior ao feminino;
+  * A faixa etária de 20 a 40 anos é a que possui maior quantidade de vítimas;
+  * A taxa de severidade vinha aumentando até 2021/2022, mas após esses anos apresentou uma queda, porém com uma tendência geral de aumento no Transporte de Cargas e uma tendência geral de redução no Transporte de Passageiros.
+  
+<p>A partir da aplicação dos procedimentos de ANACOR e clusterização ficou evidente que a categoria "jovem" está mais associada a sinistros classificados com estado físico "ferido grave" em ambas modalidades de transporte. Para o Transporte de Cargas, a condição metereológica "com chuva" e o traçado da via "intersecção" são as características mais associados com sinistros "com vítimas fatais". Ainda para o Transporte de Cargas, os sinistros "com vítimas fatais" estão mais associados à fase do dia "Anoitecer" e traçado da via "Reta". Para o Transporte de Passageiros, os sinistros com vítimas fatais estão mais associados com o traçado da via "intersecção".
+
+<p>Como conclusão, tem-se que as técnicas estatísticas apresentadas permitiram uma análise descritiva dos sinsitros envolvendo o Transporte de Cargas e de Passageiros e a identificação de fatores de risco associados à ocorrência e à severidade dos sinsitros. 
+  
+  
+# Referências  
+
+BRASIL. Polícia Federal Rodoviária. **Institucional**. Disponível em: https://www.gov.br/prf/pt-br/acesso-a-informacao/institucional. Acesso em: 20 de agosto. 2024.        
+
+BRASIL. Polícia Federal Rodoviária. **Dados Abertos da PRF**. Disponível em: https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abertos-da-prf. Acesso em: 13 de setembro. 2024.  
+

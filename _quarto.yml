@@ -17,7 +17,10 @@ book:
   date: last-modified
   chapters:
     - index.qmd
-    - 01_intro.qmd
+    - introducao.qmd
+    - est_desc.qmd
+    - associacao.qmd
+    - conclusao.qmd
   twitter-card: true
   repo-url: https://github.com/arthurnoguti/Analise_PRF_quarto
   language: pt

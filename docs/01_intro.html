@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sinistralidade no Transporte de Cargas e de Passageiros nas Rodovias Federais - 1&nbsp; Relatório</title>
+<title>Sinistralidade no Transporte de Cargas e de Passageiros nas Rodovias Federais - 3&nbsp; Relatório</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./index.html" rel="prev">
+<link href="./est_desc.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
-<meta name="twitter:title" content="Sinistralidade no Transporte de Cargas e de Passageiros nas Rodovias Federais - 1&nbsp; Relatório">
+<meta name="twitter:title" content="Sinistralidade no Transporte de Cargas e de Passageiros nas Rodovias Federais - 3&nbsp; Relatório">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -92,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Relatório</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_intro.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Relatório</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -128,8 +128,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./introducao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./est_desc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Estatísticas descritivas sobre a sinistralidade no Transporte de Cargas e de Passageiros</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./01_intro.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Relatório</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Relatório</span></span></a>
   </div>
 </li>
     </ul>
@@ -142,43 +154,43 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#estatísticas-descritivas-sobre-a-sinistralidade-no-transporte-de-cargas-e-de-passageiros" id="toc-estatísticas-descritivas-sobre-a-sinistralidade-no-transporte-de-cargas-e-de-passageiros" class="nav-link active" data-scroll-target="#estatísticas-descritivas-sobre-a-sinistralidade-no-transporte-de-cargas-e-de-passageiros"><span class="header-section-number">2</span> Estatísticas descritivas sobre a sinistralidade no Transporte de Cargas e de Passageiros</a>
+  <li><a href="#estatísticas-descritivas-sobre-a-sinistralidade-no-transporte-de-cargas-e-de-passageiros" id="toc-estatísticas-descritivas-sobre-a-sinistralidade-no-transporte-de-cargas-e-de-passageiros" class="nav-link active" data-scroll-target="#estatísticas-descritivas-sobre-a-sinistralidade-no-transporte-de-cargas-e-de-passageiros"><span class="header-section-number">4</span> Estatísticas descritivas sobre a sinistralidade no Transporte de Cargas e de Passageiros</a>
   <ul class="collapse">
-  <li><a href="#base-de-dados-sobre-os-sinistros" id="toc-base-de-dados-sobre-os-sinistros" class="nav-link" data-scroll-target="#base-de-dados-sobre-os-sinistros"><span class="header-section-number">2.1</span> Base de dados sobre os sinistros</a>
+  <li><a href="#base-de-dados-sobre-os-sinistros" id="toc-base-de-dados-sobre-os-sinistros" class="nav-link" data-scroll-target="#base-de-dados-sobre-os-sinistros"><span class="header-section-number">4.1</span> Base de dados sobre os sinistros</a>
   <ul class="collapse">
-  <li><a href="#evolução-da-quantidade-de-sinistros" id="toc-evolução-da-quantidade-de-sinistros" class="nav-link" data-scroll-target="#evolução-da-quantidade-de-sinistros"><span class="header-section-number">2.1.1</span> Evolução da quantidade de sinistros</a></li>
-  <li><a href="#evolução-dos-tipos-de-sinistros" id="toc-evolução-dos-tipos-de-sinistros" class="nav-link" data-scroll-target="#evolução-dos-tipos-de-sinistros"><span class="header-section-number">2.1.2</span> Evolução dos tipos de sinistros</a></li>
-  <li><a href="#quadro-dia-da-semana-vs-hora-do-dia" id="toc-quadro-dia-da-semana-vs-hora-do-dia" class="nav-link" data-scroll-target="#quadro-dia-da-semana-vs-hora-do-dia"><span class="header-section-number">2.1.3</span> Quadro dia da semana <em>vs</em> hora do dia</a></li>
+  <li><a href="#evolução-da-quantidade-de-sinistros" id="toc-evolução-da-quantidade-de-sinistros" class="nav-link" data-scroll-target="#evolução-da-quantidade-de-sinistros"><span class="header-section-number">4.1.1</span> Evolução da quantidade de sinistros</a></li>
+  <li><a href="#evolução-dos-tipos-de-sinistros" id="toc-evolução-dos-tipos-de-sinistros" class="nav-link" data-scroll-target="#evolução-dos-tipos-de-sinistros"><span class="header-section-number">4.1.2</span> Evolução dos tipos de sinistros</a></li>
+  <li><a href="#quadro-dia-da-semana-vs-hora-do-dia" id="toc-quadro-dia-da-semana-vs-hora-do-dia" class="nav-link" data-scroll-target="#quadro-dia-da-semana-vs-hora-do-dia"><span class="header-section-number">4.1.3</span> Quadro dia da semana <em>vs</em> hora do dia</a></li>
   </ul></li>
-  <li><a href="#base-de-dados-sobre-as-vítimas" id="toc-base-de-dados-sobre-as-vítimas" class="nav-link" data-scroll-target="#base-de-dados-sobre-as-vítimas"><span class="header-section-number">2.2</span> Base de dados sobre as vítimas</a>
+  <li><a href="#base-de-dados-sobre-as-vítimas" id="toc-base-de-dados-sobre-as-vítimas" class="nav-link" data-scroll-target="#base-de-dados-sobre-as-vítimas"><span class="header-section-number">4.2</span> Base de dados sobre as vítimas</a>
   <ul class="collapse">
-  <li><a href="#idade" id="toc-idade" class="nav-link" data-scroll-target="#idade"><span class="header-section-number">2.2.1</span> Idade</a></li>
-  <li><a href="#sexo" id="toc-sexo" class="nav-link" data-scroll-target="#sexo"><span class="header-section-number">2.2.2</span> Sexo</a></li>
-  <li><a href="#quadro-sexo-x-faixa-etária" id="toc-quadro-sexo-x-faixa-etária" class="nav-link" data-scroll-target="#quadro-sexo-x-faixa-etária"><span class="header-section-number">2.2.3</span> Quadro sexo <em>x</em> faixa etária</a></li>
-  <li><a href="#evolução-do-número-de-vítimas" id="toc-evolução-do-número-de-vítimas" class="nav-link" data-scroll-target="#evolução-do-número-de-vítimas"><span class="header-section-number">2.2.4</span> Evolução do número de vítimas</a></li>
-  <li><a href="#severidade-do-estado-das-vítimas" id="toc-severidade-do-estado-das-vítimas" class="nav-link" data-scroll-target="#severidade-do-estado-das-vítimas"><span class="header-section-number">2.2.5</span> Severidade do estado das vítimas</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#associação-entre-as-variáveis-do-sinistro" id="toc-associação-entre-as-variáveis-do-sinistro" class="nav-link" data-scroll-target="#associação-entre-as-variáveis-do-sinistro"><span class="header-section-number">3</span> Associação entre as variáveis do sinistro</a>
-  <ul class="collapse">
-  <li><a href="#estado-físico-da-vítima-x-características-da-vítima" id="toc-estado-físico-da-vítima-x-características-da-vítima" class="nav-link" data-scroll-target="#estado-físico-da-vítima-x-características-da-vítima"><span class="header-section-number">3.1</span> Estado físico da vítima <em>x</em> Características da vítima</a>
-  <ul class="collapse">
-  <li><a href="#mapas-perceptuais-da-ancor" id="toc-mapas-perceptuais-da-ancor" class="nav-link" data-scroll-target="#mapas-perceptuais-da-ancor"><span class="header-section-number">3.1.1</span> Mapas perceptuais da ANCOR</a></li>
-  <li><a href="#clusterização-das-categorias" id="toc-clusterização-das-categorias" class="nav-link" data-scroll-target="#clusterização-das-categorias"><span class="header-section-number">3.1.2</span> Clusterização das categorias</a></li>
-  </ul></li>
-  <li><a href="#classificação-do-sinistro-x-características-ambientais" id="toc-classificação-do-sinistro-x-características-ambientais" class="nav-link" data-scroll-target="#classificação-do-sinistro-x-características-ambientais"><span class="header-section-number">3.2</span> Classificação do sinistro <em>x</em> Características ambientais</a>
-  <ul class="collapse">
-  <li><a href="#mapas-perceptuais-da-anacor" id="toc-mapas-perceptuais-da-anacor" class="nav-link" data-scroll-target="#mapas-perceptuais-da-anacor"><span class="header-section-number">3.2.1</span> Mapas perceptuais da ANACOR</a></li>
-  <li><a href="#clusterização-das-categorias-1" id="toc-clusterização-das-categorias-1" class="nav-link" data-scroll-target="#clusterização-das-categorias-1"><span class="header-section-number">3.2.2</span> Clusterização das categorias</a></li>
-  </ul></li>
-  <li><a href="#classificação-do-sinistro-x-características-viárias" id="toc-classificação-do-sinistro-x-características-viárias" class="nav-link" data-scroll-target="#classificação-do-sinistro-x-características-viárias"><span class="header-section-number">3.3</span> Classificação do sinistro <em>x</em> Características viárias</a>
-  <ul class="collapse">
-  <li><a href="#mapas-perceptuais-da-anacor-1" id="toc-mapas-perceptuais-da-anacor-1" class="nav-link" data-scroll-target="#mapas-perceptuais-da-anacor-1"><span class="header-section-number">3.3.1</span> Mapas perceptuais da ANACOR</a></li>
-  <li><a href="#clusterização-das-categorias-2" id="toc-clusterização-das-categorias-2" class="nav-link" data-scroll-target="#clusterização-das-categorias-2"><span class="header-section-number">3.3.2</span> Clusterização das categorias</a></li>
+  <li><a href="#idade" id="toc-idade" class="nav-link" data-scroll-target="#idade"><span class="header-section-number">4.2.1</span> Idade</a></li>
+  <li><a href="#sexo" id="toc-sexo" class="nav-link" data-scroll-target="#sexo"><span class="header-section-number">4.2.2</span> Sexo</a></li>
+  <li><a href="#quadro-sexo-x-faixa-etária" id="toc-quadro-sexo-x-faixa-etária" class="nav-link" data-scroll-target="#quadro-sexo-x-faixa-etária"><span class="header-section-number">4.2.3</span> Quadro sexo <em>x</em> faixa etária</a></li>
+  <li><a href="#evolução-do-número-de-vítimas" id="toc-evolução-do-número-de-vítimas" class="nav-link" data-scroll-target="#evolução-do-número-de-vítimas"><span class="header-section-number">4.2.4</span> Evolução do número de vítimas</a></li>
+  <li><a href="#severidade-do-estado-das-vítimas" id="toc-severidade-do-estado-das-vítimas" class="nav-link" data-scroll-target="#severidade-do-estado-das-vítimas"><span class="header-section-number">4.2.5</span> Severidade do estado das vítimas</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão"><span class="header-section-number">4</span> Conclusão</a></li>
-  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências"><span class="header-section-number">5</span> Referências</a></li>
+  <li><a href="#associação-entre-as-variáveis-do-sinistro" id="toc-associação-entre-as-variáveis-do-sinistro" class="nav-link" data-scroll-target="#associação-entre-as-variáveis-do-sinistro"><span class="header-section-number">5</span> Associação entre as variáveis do sinistro</a>
+  <ul class="collapse">
+  <li><a href="#estado-físico-da-vítima-x-características-da-vítima" id="toc-estado-físico-da-vítima-x-características-da-vítima" class="nav-link" data-scroll-target="#estado-físico-da-vítima-x-características-da-vítima"><span class="header-section-number">5.1</span> Estado físico da vítima <em>x</em> Características da vítima</a>
+  <ul class="collapse">
+  <li><a href="#mapas-perceptuais-da-ancor" id="toc-mapas-perceptuais-da-ancor" class="nav-link" data-scroll-target="#mapas-perceptuais-da-ancor"><span class="header-section-number">5.1.1</span> Mapas perceptuais da ANCOR</a></li>
+  <li><a href="#clusterização-das-categorias" id="toc-clusterização-das-categorias" class="nav-link" data-scroll-target="#clusterização-das-categorias"><span class="header-section-number">5.1.2</span> Clusterização das categorias</a></li>
+  </ul></li>
+  <li><a href="#classificação-do-sinistro-x-características-ambientais" id="toc-classificação-do-sinistro-x-características-ambientais" class="nav-link" data-scroll-target="#classificação-do-sinistro-x-características-ambientais"><span class="header-section-number">5.2</span> Classificação do sinistro <em>x</em> Características ambientais</a>
+  <ul class="collapse">
+  <li><a href="#mapas-perceptuais-da-anacor" id="toc-mapas-perceptuais-da-anacor" class="nav-link" data-scroll-target="#mapas-perceptuais-da-anacor"><span class="header-section-number">5.2.1</span> Mapas perceptuais da ANACOR</a></li>
+  <li><a href="#clusterização-das-categorias-1" id="toc-clusterização-das-categorias-1" class="nav-link" data-scroll-target="#clusterização-das-categorias-1"><span class="header-section-number">5.2.2</span> Clusterização das categorias</a></li>
+  </ul></li>
+  <li><a href="#classificação-do-sinistro-x-características-viárias" id="toc-classificação-do-sinistro-x-características-viárias" class="nav-link" data-scroll-target="#classificação-do-sinistro-x-características-viárias"><span class="header-section-number">5.3</span> Classificação do sinistro <em>x</em> Características viárias</a>
+  <ul class="collapse">
+  <li><a href="#mapas-perceptuais-da-anacor-1" id="toc-mapas-perceptuais-da-anacor-1" class="nav-link" data-scroll-target="#mapas-perceptuais-da-anacor-1"><span class="header-section-number">5.3.1</span> Mapas perceptuais da ANACOR</a></li>
+  <li><a href="#clusterização-das-categorias-2" id="toc-clusterização-das-categorias-2" class="nav-link" data-scroll-target="#clusterização-das-categorias-2"><span class="header-section-number">5.3.2</span> Clusterização das categorias</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão"><span class="header-section-number">6</span> Conclusão</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências"><span class="header-section-number">7</span> Referências</a></li>
   </ul>
 </nav>
     </div>
@@ -187,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Relatório</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Relatório</span></h1>
 </div>
 
 
@@ -240,17 +252,17 @@ Essa base de dados fornecida pela PRF é relativa às vítimas dos sinistros de 
 </li>
 <li>Micro-ônibus.</li>
 </ul>
-<section id="estatísticas-descritivas-sobre-a-sinistralidade-no-transporte-de-cargas-e-de-passageiros" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Estatísticas descritivas sobre a sinistralidade no Transporte de Cargas e de Passageiros</h1>
+<section id="estatísticas-descritivas-sobre-a-sinistralidade-no-transporte-de-cargas-e-de-passageiros" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Estatísticas descritivas sobre a sinistralidade no Transporte de Cargas e de Passageiros</h1>
 <hr>
 <p>
 </p><p>Essa seção do trabalho foi dividida em duas partes, a análise focando nos sinistros e a análise focando nas vítimas. Para isso, foram identificadas as vítimas que pertenciam ao mesmo sinistro a partir do número de identificação do sinistro. Com isso foi criada outra base de dados agregando as informações relativas às vítimas e aos sinistros. Já para a análise das vítimas foi apenas utilizado a própria base de dados previamente fornecida pela PRF.</p>
-<section id="base-de-dados-sobre-os-sinistros" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="base-de-dados-sobre-os-sinistros"><span class="header-section-number">2.1</span> Base de dados sobre os sinistros</h2>
+<section id="base-de-dados-sobre-os-sinistros" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="base-de-dados-sobre-os-sinistros"><span class="header-section-number">4.1</span> Base de dados sobre os sinistros</h2>
 <p>
 </p><p>Neste tópico serão apresentadas as estatísticas descritivas relativas às características dos sinistros. Nos gráficos da Seção 2.1.1 podem ser observadas as quantidades de sinistros (com vítimas fatais, com vítimas feridas e sem vítimas) ao longo do período de análise tanto para o Transporte de Cargas quanto para o Transporte de Passageiros. A quantidade de sinistros no Transporte de Cargas foi em torno de 11 vezes maior que no Transportes de Passageiros tomando o ano de 2023 como referência. De 2011 a 2023 houve uma redução geral da quantidade de sinistros nas duas modalidades. A queda especialmente pronunciada do número de sinistros sem vítimas ao longo do período de análise é atribuída a mudanças nos procedimentos de registros, as quais serão discutidas nas próximas seções deste documento.</p>
-<section id="evolução-da-quantidade-de-sinistros" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="evolução-da-quantidade-de-sinistros"><span class="header-section-number">2.1.1</span> Evolução da quantidade de sinistros</h3>
+<section id="evolução-da-quantidade-de-sinistros" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="evolução-da-quantidade-de-sinistros"><span class="header-section-number">4.1.1</span> Evolução da quantidade de sinistros</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Com vítimas fatais</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Com vítimas feridas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Sem vítimas</a></li></ul>
 <div class="tab-content">
@@ -284,8 +296,8 @@ Essa base de dados fornecida pela PRF é relativa às vítimas dos sinistros de 
 Para analisar a evolução dos tipos de sinistros, foram gerados dois gráficos de barras dinâmicos (Gráficos da seção 2.1.2), que demonstram a porcentagem de ocorrência de cada tipo de sinistro conforme seu respectivo ano.
 </p><p>
 </p></section>
-<section id="evolução-dos-tipos-de-sinistros" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="evolução-dos-tipos-de-sinistros"><span class="header-section-number">2.1.2</span> Evolução dos tipos de sinistros</h3>
+<section id="evolução-dos-tipos-de-sinistros" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="evolução-dos-tipos-de-sinistros"><span class="header-section-number">4.1.2</span> Evolução dos tipos de sinistros</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Transporte de Cargas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Transporte de Passageiros</a></li></ul>
 <div class="tab-content">
@@ -318,8 +330,8 @@ Para o Transporte de Cargas, houve uma diminuição significativa para os tipos 
 </p><p>
 </p><p>Já para o Transporte de Passageiros, considerando os anos de 2011 e 2023, houve um aumento de 4,2% nos casos de “Atropelamento de pedestre” e um aumento de 7% nas “Colisões frontais”, enquanto a “Colisão traseira” e “Colisão lateral” tiveram uma queda de, respectivamente, 10,4% e 8,4%.</p>
 </section>
-<section id="quadro-dia-da-semana-vs-hora-do-dia" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3" class="anchored" data-anchor-id="quadro-dia-da-semana-vs-hora-do-dia"><span class="header-section-number">2.1.3</span> Quadro dia da semana <em>vs</em> hora do dia</h3>
+<section id="quadro-dia-da-semana-vs-hora-do-dia" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="quadro-dia-da-semana-vs-hora-do-dia"><span class="header-section-number">4.1.3</span> Quadro dia da semana <em>vs</em> hora do dia</h3>
 <p>
 </p><p>Os quadros a seguir contém a representação da quantidade de sinistros total entre 2011 e 2023 em cada horário de cada dia da semana. No Transporte de Cargas há uma quantidade de sinistros maior entre os horários de 7 às 19 horas em dias úteis, tendo um pico de sinistros na sexta-feira entre às 16 e 17 horas. No Transporte de Passageiros houve uma quantidade maior de sinistros nos horários entre 7 horas e 18 horas, com uma concentração maior no ínicio e no fim deste período.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -345,12 +357,12 @@ Para o Transporte de Cargas, houve uma diminuição significativa para os tipos 
 </div>
 </section>
 </section>
-<section id="base-de-dados-sobre-as-vítimas" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="base-de-dados-sobre-as-vítimas"><span class="header-section-number">2.2</span> Base de dados sobre as vítimas</h2>
+<section id="base-de-dados-sobre-as-vítimas" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="base-de-dados-sobre-as-vítimas"><span class="header-section-number">4.2</span> Base de dados sobre as vítimas</h2>
 <p>
 </p><p>Neste tópico são apresentadas algumas estatísticas a respeito das vítimas envolvidas em sinistros no Transporte de Cargas e de Passageiros, sendo elas ocupantes ou não dos veículos de cargas ou passageiros, incluindo, portanto, a outra parte envolvida no sinsitro. Em relação à idade das vítimas, os histrogramas da seção 2.2.1 mostram que a distribuição é similar no Transporte de Cargas e de Passageiros. A linha pontilhada em vermelho representa a média das idades.</p>
-<section id="idade" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="idade"><span class="header-section-number">2.2.1</span> Idade</h3>
+<section id="idade" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="idade"><span class="header-section-number">4.2.1</span> Idade</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Transporte de Cargas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Transporte de Passageiros</a></li></ul>
 <div class="tab-content">
@@ -379,8 +391,8 @@ Para o Transporte de Cargas, houve uma diminuição significativa para os tipos 
 </div>
 </div>
 </section>
-<section id="sexo" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="sexo"><span class="header-section-number">2.2.2</span> Sexo</h3>
+<section id="sexo" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="sexo"><span class="header-section-number">4.2.2</span> Sexo</h3>
 <p>
 </p><p>Nas tabelas abaixo são apresentadas as porcentagens segundo sexo de cada modalidade de transporte.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -449,8 +461,8 @@ Pode-se notar que, para o Transporte de Cargas, o sexo masculino representa 92,0
 </p><p>
 </p><p>Os quadros da seção 2.2.3 contém a representação da quantidade de vítimas segundo sexo e faixa etária. Percebe-se que tanto para o Transporte de Cargas quanto o Transporte de Passageiros, há uma quantidade maior de vítimas do sexo masculino na faixa etária de 20 a 40 anos de idade.</p>
 </section>
-<section id="quadro-sexo-x-faixa-etária" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="quadro-sexo-x-faixa-etária"><span class="header-section-number">2.2.3</span> Quadro sexo <em>x</em> faixa etária</h3>
+<section id="quadro-sexo-x-faixa-etária" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="quadro-sexo-x-faixa-etária"><span class="header-section-number">4.2.3</span> Quadro sexo <em>x</em> faixa etária</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">Transporte de Cargas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">Transporte de Passageiros</a></li></ul>
 <div class="tab-content">
@@ -473,8 +485,8 @@ Pode-se notar que, para o Transporte de Cargas, o sexo masculino representa 92,0
 </div>
 </div>
 </section>
-<section id="evolução-do-número-de-vítimas" class="level3" data-number="2.2.4">
-<h3 data-number="2.2.4" class="anchored" data-anchor-id="evolução-do-número-de-vítimas"><span class="header-section-number">2.2.4</span> Evolução do número de vítimas</h3>
+<section id="evolução-do-número-de-vítimas" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="evolução-do-número-de-vítimas"><span class="header-section-number">4.2.4</span> Evolução do número de vítimas</h3>
 <p>
 Os gráficos desta seção permitem observar a evolução da quantidade de vítimas em sinistros no Transporte de Cargas e de Passageiros. Pode-se observar uma diminuição significativa na quantidade de vítimas ilesas ao longo do período de análise. Esta redução especialmente pronunciada se deve à uma mudança nos procedimentos de registro da PRF. Em 2014 foi implantado o e-DAT (Declaração de Acidentes de Trânsito) que pode ser feita pelos próprios envolvidos no sinistro via internet, de modo que a partir deste ano a PRF não realizava mais o registro do boletim de ocorrência convencional (LPAT) no local do sinistro para os sinistros sem vítima, exceto para os seguintes casos: Lesões em outras pessoas envolvidas no mesmo sinistros; Envolvimento de servidores da PRF; Danos a bens públicos não concedidos à iniciativa privada; Danos ao meio ambiente; Condutor inabilitado, com CNH suspensa ou cassada; Vazamento ou derramamento de produto perigoso, avaria nas embalagens dos produtos perigosos fracionados, danos no equipamento de transporte de produto perigoso a granel; Envolvimento de algum condutor que esteja sob influência de substância psicoativa de uso indevido, independentemente do teor ou da forma de constatação; Ocorrência de incêndio; Veículo localizado; e Condutor não localizado. Em razão disso, as análises seguintes conduzidas neste documento levarão em consideração apenas os dados referentes ao período 2019-2023.
 </p><p>
@@ -501,12 +513,12 @@ Os gráficos desta seção permitem observar a evolução da quantidade de víti
 </div>
 </div>
 </section>
-<section id="severidade-do-estado-das-vítimas" class="level3" data-number="2.2.5">
-<h3 data-number="2.2.5" class="anchored" data-anchor-id="severidade-do-estado-das-vítimas"><span class="header-section-number">2.2.5</span> Severidade do estado das vítimas</h3>
+<section id="severidade-do-estado-das-vítimas" class="level3" data-number="4.2.5">
+<h3 data-number="4.2.5" class="anchored" data-anchor-id="severidade-do-estado-das-vítimas"><span class="header-section-number">4.2.5</span> Severidade do estado das vítimas</h3>
 <p>
 </p><p>Para avaliar a taxa de severidade ao decorrer dos anos, foi gerado o gráfico 2.2.5.1. A taxa de severidade representa a soma entre os “feridos graves” mais os “mortos” dividido pelo total de sinistros. Para o Transporte de Cargas, o ano de 2022 resultou com a maior taxa de severidade (10% das vítimas de todos os sinistros com Transporte de Cargas nesse ano foram classificados como “feridos graves” ou “mortos”), enquanto para o Transporte de Passageiros foi no ano de 2021 com 8,87% dos casos. Nota-se ainda que no Transporte de Cargas há uma tendência de aumento da severidade, já no Transporte de Passageiros, uma tendência de redução.</p>
-<section id="evolução-da-taxa-de-severidade" class="level4" data-number="2.2.5.1">
-<h4 data-number="2.2.5.1" class="anchored" data-anchor-id="evolução-da-taxa-de-severidade"><span class="header-section-number">2.2.5.1</span> Evolução da taxa de severidade</h4>
+<section id="evolução-da-taxa-de-severidade" class="level4" data-number="4.2.5.1">
+<h4 data-number="4.2.5.1" class="anchored" data-anchor-id="evolução-da-taxa-de-severidade"><span class="header-section-number">4.2.5.1</span> Evolução da taxa de severidade</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div class="plotly html-widget html-fill-item" id="htmlwidget-9570e4412cdc4b2bdba3" style="width:100%;height:464px;"></div>
@@ -517,8 +529,8 @@ Os gráficos desta seção permitem observar a evolução da quantidade de víti
 </section>
 </section>
 </section>
-<section id="associação-entre-as-variáveis-do-sinistro" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Associação entre as variáveis do sinistro</h1>
+<section id="associação-entre-as-variáveis-do-sinistro" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Associação entre as variáveis do sinistro</h1>
 <hr>
 <p>
 </p><p>Para essas análises, também foram considerado apenas os anos de 2019 até 2023. Para a verificação da associação entre as variáveis da base de dados utilizou-se primeiramente o teste do qui-quadrado. Para isso, as variáveis quantitativas foram convertidas em variáveis qualitativas categóricas. A associação entre as seguintes variáveis resultou estatistiamente significativa a um nível de confiança de 95%:</p>
@@ -537,12 +549,12 @@ Os gráficos desta seção permitem observar a evolução da quantidade de víti
 Tendo em vista a existência dessa associação, de maneira complementar foi utilizado o método estatístico de Análise de Correspondência (ANACOR) para analisar as categorias de cada variável que contribuem para esta associação. A ANACOR permite a elaboração do mapa perceptual, em que as categorias das variáveis são plotadas segundo duas dimensões. Aquelas categorias mais próximas umas das outras representam um maior nível de associação.
 </p><p>
 </p><p>Na sequência, para facilitar a identificação das categorias mais próximas no mapa perceptual, foi utilizado o método de clusterização para gerar grupos (clusters) com as categorias que possuíam maior associação entre si.</p>
-<section id="estado-físico-da-vítima-x-características-da-vítima" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="estado-físico-da-vítima-x-características-da-vítima"><span class="header-section-number">3.1</span> Estado físico da vítima <em>x</em> Características da vítima</h2>
+<section id="estado-físico-da-vítima-x-características-da-vítima" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="estado-físico-da-vítima-x-características-da-vítima"><span class="header-section-number">5.1</span> Estado físico da vítima <em>x</em> Características da vítima</h2>
 <p>
 </p><p>Essa seção trata da análise da associação entre a variável “Estado físico” e as variáveis relacionadas às características das vítimas (sexo e idade).</p>
-<section id="mapas-perceptuais-da-ancor" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="mapas-perceptuais-da-ancor"><span class="header-section-number">3.1.1</span> Mapas perceptuais da ANCOR</h3>
+<section id="mapas-perceptuais-da-ancor" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="mapas-perceptuais-da-ancor"><span class="header-section-number">5.1.1</span> Mapas perceptuais da ANCOR</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">Transporte de Cargas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">Transporte de Passageiros</a></li></ul>
 <div class="tab-content">
@@ -571,8 +583,8 @@ Tendo em vista a existência dessa associação, de maneira complementar foi uti
 </div>
 </div>
 </section>
-<section id="clusterização-das-categorias" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="clusterização-das-categorias"><span class="header-section-number">3.1.2</span> Clusterização das categorias</h3>
+<section id="clusterização-das-categorias" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="clusterização-das-categorias"><span class="header-section-number">5.1.2</span> Clusterização das categorias</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">Transporte de Cargas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">Transporte de Passageiros</a></li></ul>
 <div class="tab-content">
@@ -618,16 +630,16 @@ Tendo em vista a existência dessa associação, de maneira complementar foi uti
 </ul>
 </section>
 </section>
-<section id="classificação-do-sinistro-x-características-ambientais" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="classificação-do-sinistro-x-características-ambientais"><span class="header-section-number">3.2</span> Classificação do sinistro <em>x</em> Características ambientais</h2>
+<section id="classificação-do-sinistro-x-características-ambientais" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="classificação-do-sinistro-x-características-ambientais"><span class="header-section-number">5.2</span> Classificação do sinistro <em>x</em> Características ambientais</h2>
 <p>
 </p><p>Essa seção tem por objetivo avaliar a associação entre as classificações dos sinistros com características ambientais (condição meteorológica e fase do dia). Para facilitar a visualização do mapa perceptual, a quantidade de categorias da variável “condição meteorológica” foi reduzida, conforme descrito a seguir:</p>
 <ul>
 <li>As categorias “Sol”, “Céu Claro” e “Nublado” foram agregadas na categoria “sem chuva”;</li>
 <li>As categorias “Chuva” e “Garoa/Chuvisco” foram agregadas na categoria “com chuva”.</li>
 </ul>
-<section id="mapas-perceptuais-da-anacor" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="mapas-perceptuais-da-anacor"><span class="header-section-number">3.2.1</span> Mapas perceptuais da ANACOR</h3>
+<section id="mapas-perceptuais-da-anacor" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="mapas-perceptuais-da-anacor"><span class="header-section-number">5.2.1</span> Mapas perceptuais da ANACOR</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">Transporte de Cargas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false">Transporte de Passageiros</a></li></ul>
 <div class="tab-content">
@@ -656,8 +668,8 @@ Tendo em vista a existência dessa associação, de maneira complementar foi uti
 </div>
 </div>
 </section>
-<section id="clusterização-das-categorias-1" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="clusterização-das-categorias-1"><span class="header-section-number">3.2.2</span> Clusterização das categorias</h3>
+<section id="clusterização-das-categorias-1" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="clusterização-das-categorias-1"><span class="header-section-number">5.2.2</span> Clusterização das categorias</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true">Transporte de Cargas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false">Transporte de Passageiros</a></li></ul>
 <div class="tab-content">
@@ -695,16 +707,16 @@ Tendo em vista a existência dessa associação, de maneira complementar foi uti
 </p><p>Já para o Transporte de Passageiros, sinistros com vítimas fatais estão mais associados com a fase do dia “Anoitecer” e sinistros com vítimas feridas estão mais associados com a fase do dia “Plena noite”.</p>
 </section>
 </section>
-<section id="classificação-do-sinistro-x-características-viárias" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="classificação-do-sinistro-x-características-viárias"><span class="header-section-number">3.3</span> Classificação do sinistro <em>x</em> Características viárias</h2>
+<section id="classificação-do-sinistro-x-características-viárias" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="classificação-do-sinistro-x-características-viárias"><span class="header-section-number">5.3</span> Classificação do sinistro <em>x</em> Características viárias</h2>
 <p>
 </p><p>Essa seção tem por objetivo avaliar a associação entre as classificações dos sinistros com as características da viárias (tipo de pista e traçado da via).Para facilitar a visualização do mapa perceptual, a quantidade de categorias da variável “tipo de pista”, sendo agregadas as categorias “dupla” e “múltipla” para uma categoria denominada “dupla/múltipla”; para a variável “traçado via” foram agregadas as seguintes categorias:</p>
 <ul>
 <li>“Intersecção de vias” e “Rotatoria” foram agregadas na categoria “intersecção”;</li>
 <li>“Ponte”, “Túnel” e “Viaduto” foram agregadas na categoria “obra de arte”.</li>
 </ul>
-<section id="mapas-perceptuais-da-anacor-1" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="mapas-perceptuais-da-anacor-1"><span class="header-section-number">3.3.1</span> Mapas perceptuais da ANACOR</h3>
+<section id="mapas-perceptuais-da-anacor-1" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="mapas-perceptuais-da-anacor-1"><span class="header-section-number">5.3.1</span> Mapas perceptuais da ANACOR</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true">Transporte de Cargas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false">Transporte de Passageiros</a></li></ul>
 <div class="tab-content">
@@ -733,8 +745,8 @@ Tendo em vista a existência dessa associação, de maneira complementar foi uti
 </div>
 </div>
 </section>
-<section id="clusterização-das-categorias-2" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="clusterização-das-categorias-2"><span class="header-section-number">3.3.2</span> Clusterização das categorias</h3>
+<section id="clusterização-das-categorias-2" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="clusterização-das-categorias-2"><span class="header-section-number">5.3.2</span> Clusterização das categorias</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true">Transporte de Cargas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false">Transporte de Passageiros</a></li></ul>
 <div class="tab-content">
@@ -774,8 +786,8 @@ A partir dos mapas perceptuais e da clusterização, foi possível verificar que
 </section>
 </section>
 </section>
-<section id="conclusão" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Conclusão</h1>
+<section id="conclusão" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Conclusão</h1>
 <hr>
 <p>
 </p><p>Como análise geral da sinistralidade no Transporte de Cargas e de Passageiros nas rodovias federais brasileiras tem-se que:</p>
@@ -791,8 +803,8 @@ A partir dos mapas perceptuais e da clusterização, foi possível verificar que
 <p>
 </p><p>Como conclusão, tem-se que as técnicas estatísticas apresentadas permitiram uma análise descritiva dos sinsitros envolvendo o Transporte de Cargas e de Passageiros e a identificação de fatores de risco associados à ocorrência e à severidade dos sinsitros.</p>
 </section>
-<section id="referências" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Referências</h1>
+<section id="referências" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Referências</h1>
 
 
 </section>
@@ -1216,8 +1228,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Resumo">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Resumo</span>
+      <a href="./est_desc.html" class="pagination-link" aria-label="Estatísticas descritivas sobre a sinistralidade no Transporte de Cargas e de Passageiros">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Estatísticas descritivas sobre a sinistralidade no Transporte de Cargas e de Passageiros</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

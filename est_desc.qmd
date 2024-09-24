@@ -1,0 +1,556 @@
+<style>
+p {
+  text-align: justify;  
+  text-indent: 20px;   
+}
+</style>  
+
+# Estatísticas descritivas sobre a sinistralidade no Transporte de Cargas e de Passageiros    
+
+***  
+
+```{r, include=FALSE}
+
+source("script-part1.R")
+
+```
+
+<p>Com o intuito de avaliar a representatividade do Transporte de Cargas e de Passageiros, em 2022 os veículos de cargas representaram `r round(p_carg_frota * 100, 2 )`% da frota nacional e os veículos de passageiros `r round(p_pass_frota * 100, 2)` %, entretanto, ao analisarmos as suas frequências relativas nos sinistros ocorridos em rodovias federais e a quantidade de óbitos fornecidos pelo DATASUS, notou-se que `r round(p_carg_sin * 100,2)`% dos sinistros totais no ano e `r round(p_carg_obt * 100, 2)`% dos óbitos eram relativos ao Transporte de Cargas, e `r round(p_pass_sin * 100,2)`% dos sinistros e `r round(p_carg_obt * 100, 2)`% dos óbitos ao Transporte de Passageiros.    
+<p>Essa seção do trabalho foi dividida em duas partes, a análise focando nos sinistros e a análise focando nas vítimas. Para isso, foram identificadas as vítimas que pertenciam ao mesmo sinistro a partir do número de identificação do sinistro. Com isso foi criada outra base de dados agregando as informações relativas às vítimas e aos sinistros. Já para a análise das vítimas foi apenas utilizado a própria base de dados previamente fornecida pela PRF.    
+
+## Base de dados sobre os sinistros   
+
+<p>Neste tópico serão apresentadas as estatísticas descritivas relativas às características dos sinistros.  Nos gráficos da Seção 2.1.1 podem ser observadas as quantidades de sinistros (com vítimas fatais, com vítimas feridas e sem vítimas) ao longo do período de análise tanto para o Transporte de Cargas quanto para o Transporte de Passageiros. A quantidade de sinistros no Transporte de Cargas foi em torno de 11 vezes maior que no Transportes de Passageiros tomando o ano de 2023 como referência. De 2011 a 2023 houve uma redução geral da quantidade de sinistros nas duas modalidades. A queda especialmente pronunciada do número de sinistros sem vítimas ao longo do período de análise é atribuída a mudanças nos procedimentos de registros, as quais serão discutidas nas próximas seções deste documento.   
+
+### Evolução da quantidade de sinistros  
+
+::: panel-tabset  
+
+#### Com vítimas fatais    
+
+```{r, echo=FALSE}
+
+g1 <- ggplot(data = total_sinistros %>% filter(classificacao_acidente == "com vitimas fatais"), 
+             aes(x = ano, colour = grupo))+ 
+  geom_line(aes(y = quantidade))+
+  labs(x = "Ano", y = "Quantidade de sinistros com vítimas fatais")+
+  theme(
+    axis.title.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.text.x =  element_text(size = 12),
+    axis.text.y =  element_text(size = 12),
+  )+
+  theme_onsv()
+
+ggplotly(g1)
+```
+
+
+#### Com vítimas feridas
+
+```{r, echo=FALSE}
+g2 <- ggplot(data = total_sinistros %>% filter(classificacao_acidente == "com vitimas feridas"), 
+             aes(x = ano, colour = grupo))+ 
+  geom_line(aes(y = quantidade))+
+  labs(x = "Ano", y = "Quantidade de sinistros com vítimas feridas")+
+  theme(
+    axis.title.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.text.x =  element_text(size = 12),
+    axis.text.y =  element_text(size = 12)
+  )+
+  theme_onsv()
+
+ggplotly(g2)
+```
+
+#### Sem vítimas  
+
+```{r, echo=FALSE}
+g3 <- ggplot(data = total_sinistros %>% 
+               filter(classificacao_acidente == "sem vitimas"), 
+             aes(x = ano, colour = grupo))+ 
+  geom_line(aes(y = quantidade))+
+  labs(x = "Ano", y = "Quantidade de sinistros sem vítimas")+
+  theme(
+    axis.title.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.text.x =  element_text(size = 12),
+    axis.text.y =  element_text(size = 12)
+  )+
+  theme_onsv()
+
+ggplotly(g3)
+```  
+
+:::
+
+<p>Para analisar a evolução dos tipos de sinistros, foram gerados dois gráficos de barras dinâmicos (Gráficos da seção 2.1.2), que demonstram a porcentagem de ocorrência de cada tipo de sinistro conforme seu respectivo ano.<p>   
+
+### Evolução dos tipos de sinistros    
+
+::: panel-tabset  
+
+#### Transporte de Cargas  
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(gganimate)
+
+tipo_sinistro_carg <- carg11_23unique %>% 
+  group_by(tipo_acidente, ano) %>% 
+  summarise(
+    total = n()
+  )
+
+tipo_sinistro_carg <- na.omit(tipo_sinistro_carg)
+
+total_ano <- tipo_sinistro_carg %>% 
+  group_by(ano) %>% 
+  summarise(total_ano = sum(total))
+
+tipo_sinistro_carg <- full_join(tipo_sinistro_carg, total_ano, by = 'ano')
+
+tipo_sinistro_carg <- tipo_sinistro_carg %>% 
+  mutate(prop_ano = round(total/total_ano,3))%>% 
+  mutate(proporção = paste0(prop_ano*100, "%"))
+
+tipo_sinistro_carg2 <- tipo_sinistro_carg %>% 
+  group_by(ano) %>% 
+  arrange(ano, desc(prop_ano))%>%
+  mutate(ranking = row_number()) %>%
+  filter(ranking <=15)
+
+animacion <- tipo_sinistro_carg2 %>%
+  ggplot() +
+  geom_col(aes(ranking, prop_ano, fill = tipo_acidente)) +
+  geom_text(aes(ranking, prop_ano, label = as.factor(proporção)), hjust=-0.1) +
+  geom_text(aes(ranking, y=0 , label = tipo_acidente), hjust=1.05, size = 2.5) + 
+  geom_text(aes(x=15, y=(max(prop_ano)) , label = as.factor(ano)), vjust = 0.2, alpha = 0.5,  col = "gray", size = 20) +
+  coord_flip(clip = "off", expand = FALSE) + scale_x_reverse() +
+  theme_minimal() + theme(
+    panel.grid = element_blank(), 
+    legend.position = "none",
+    axis.ticks.y = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    plot.margin = margin(1, 4, 1, 3, "cm")
+  ) +
+  labs( y = "Proporção no ano")+
+  transition_states(ano, state_length = 0, transition_length = 2) +
+  enter_fade() +
+  exit_fade() + 
+  ease_aes('quadratic-in-out')+
+  view_follow(fixed_x = TRUE)
+
+animate(animacion, fps = 30, duration = 15, rewind = FALSE, renderer = av_renderer())
+
+```
+
+#### Transporte de Passageiros  
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tipo_sinistro_pass <- pass11_23unique %>% 
+  group_by(tipo_acidente, ano) %>% 
+  summarise(
+    total = n()
+  )
+
+tipo_sinistro_pass <- na.omit(tipo_sinistro_pass)
+
+total_ano_pass <- tipo_sinistro_pass %>% 
+  group_by(ano) %>% 
+  summarise(total_ano = sum(total))
+
+tipo_sinistro_pass <- full_join(tipo_sinistro_pass, total_ano_pass, by = 'ano')
+
+tipo_sinistro_pass <- tipo_sinistro_pass %>% 
+  mutate(prop_ano = round(total/total_ano,3))%>% 
+  mutate(proporção = paste0(prop_ano*100, "%"))
+
+tipo_sinistro_pass2 <- tipo_sinistro_pass %>% 
+  group_by(ano) %>% 
+  arrange(ano, desc(prop_ano))%>%
+  mutate(ranking = row_number()) %>%
+  filter(ranking <=15)
+
+animacion2 <- tipo_sinistro_pass2 %>%
+  ggplot() +
+  geom_col(aes(ranking, prop_ano, fill = tipo_acidente)) +
+  geom_text(aes(ranking, prop_ano, label = as.factor(proporção)), hjust=-0.1) +
+  geom_text(aes(ranking, y=0 , label = tipo_acidente), hjust=1.05, size = 2.5) + 
+  geom_text(aes(x=15, y=(max(prop_ano)) , label = as.factor(ano)), vjust = 0.2, alpha = 0.5,  col = "gray", size = 20) +
+  coord_flip(clip = "off", expand = FALSE) + scale_x_reverse() +
+  theme_minimal() + theme(
+    panel.grid = element_blank(), 
+    legend.position = "none",
+    axis.ticks.y = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    plot.margin = margin(1, 4, 1, 3, "cm")
+  ) +
+  labs( y = "Proporção no ano")+
+  transition_states(ano, state_length = 0, transition_length = 2) +
+  enter_fade() +
+  exit_fade() + 
+  ease_aes('quadratic-in-out')+
+  view_follow(fixed_x = TRUE)
+
+animate(animacion2, fps = 30, duration = 15, rewind = FALSE, renderer = av_renderer())
+```  
+
+:::    
+
+<p>Para o Transporte de Cargas, houve uma diminuição significativa para os tipos “Colisão traseira” e “Colisão lateral”, respectivamente, de 29,3% e 27,8% em 2011 para 21,7% e 18,6% em 2023. Já  o “Tombamento” apresentou um aumento de 8% em 2011 para 11,9% em 2023. É interessante notar que em 2017 houve uma mudança na denominação de “Saída da Pista” para “Saída do leito carroçável” para ambas modalidades de transporte.
+<p>Já para o Transporte de Passageiros, considerando os anos de 2011 e 2023, houve um aumento de 4,2% nos casos de "Atropelamento de pedestre" e um aumento de 7% nas "Colisões frontais", enquanto a "Colisão traseira" e "Colisão lateral" tiveram uma queda de, respectivamente, 10,4% e 8,4%.  
+
+### Quadro dia da semana *vs* hora do dia  
+
+<p>Os quadros a seguir contém a representação da quantidade de sinistros total entre 2011 e 2023 em cada horário de cada dia da semana. No Transporte de Cargas há uma quantidade de sinistros maior entre os horários de 7 às 19 horas em dias úteis, tendo um pico de sinistros na sexta-feira entre às 16 e 17 horas. No Transporte de Passageiros houve uma quantidade maior de sinistros nos horários entre 7 horas e 18 horas, com uma concentração maior no ínicio e no fim deste período.   
+
+```{r, include=FALSE}
+hd_carg <- carg11_23unique %>% 
+  group_by(hora, dia_semana) %>% 
+  summarise(total = n())
+
+col_order <- c("segunda-feira",
+               "terca-feira",
+               "quarta-feira",
+               "quinta-feira",
+               "sexta-feira",
+               "sabado",
+               "domingo"  )
+
+hd_carg$dia_semana <- factor(hd_carg$dia_semana, levels = col_order)
+
+## pass ####
+hd_pass <- pass11_23unique %>% 
+  group_by(hora, dia_semana) %>% 
+  summarise(total = n())
+
+col_order <- c("segunda-feira",
+               "terca-feira",
+               "quarta-feira",
+               "quinta-feira",
+               "sexta-feira",
+               "sabado",
+               "domingo"  )
+
+hd_pass$dia_semana <- factor(hd_pass$dia_semana, levels = col_order)
+
+
+```
+
+::: panel-tabset  
+
+#### Transporte de Cargas  
+
+```{r, echo=FALSE}
+g5 <- ggplot(hd_carg, aes(x = dia_semana, y = hora,
+                          label = total, fill = total))+
+  geom_tile()+
+  geom_text(size = 2.5)+
+  labs(title = "Quantidade de Sinistros - Transporte de Cargas" ,x = NULL, y = "Horário")+
+  scale_fill_distiller(palette = "YlOrRd", direction = 1) +
+  theme(
+    axis.title.y = element_text(size = 12),
+    axis.text.x =  element_text(size = 10),
+    axis.text.y =  element_text(size = 10)
+  )+
+  theme_onsv()
+
+ggplotly(g5, tooltip = "text")
+
+```  
+
+#### Transporte de Passageiros  
+
+```{r, echo=FALSE}
+g6 <- ggplot(hd_pass, aes(x = dia_semana, y = hora,
+                          label = total, fill = total))+
+  geom_tile()+
+  geom_text(size = 2.5)+
+  labs(title = "Quantidade de Sinistros - Transporte de Passageiros" ,x = NULL, y = "Horário")+
+  scale_fill_distiller(palette = "YlOrRd", direction = 1) +
+  theme(
+    axis.title.y = element_text(size = 12),
+    axis.text.x =  element_text(size = 10),
+    axis.text.y =  element_text(size = 10)
+  )+
+  theme_onsv()
+
+ggplotly(g6, tooltip = "text")
+
+```  
+
+:::  
+
+## Base de dados sobre as vítimas  
+
+<p>Neste tópico são apresentadas algumas estatísticas a respeito das vítimas envolvidas em sinistros no Transporte de Cargas e de Passageiros, sendo elas ocupantes ou não dos veículos de cargas ou passageiros, incluindo, portanto, a outra parte envolvida no sinsitro. Em relação à idade das vítimas, os histrogramas da seção 2.2.1 mostram que a distribuição é similar no Transporte de Cargas e de Passageiros. A linha pontilhada em vermelho representa a média das idades.  
+
+### Idade  
+
+::: panel-tabset  
+
+#### Transporte de Cargas  
+
+```{r, echo=FALSE, warning=FALSE}
+ggplot(carg_sin, aes(x = idade))+
+  geom_histogram(fill = "orange", breaks = c(0:120))+
+  labs(title = "Histograma das idades - Transporte de Cargas" ,
+       x = "Idade", y = "Quantidade de vítimas")+
+  geom_vline(xintercept = mean(carg_sin$idade, na.rm = TRUE), color = "red", linetype = "dashed")+
+  theme(
+    axis.title.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.text.x =  element_text(size = 12),
+    axis.text.y =  element_text(size = 12)
+  )+
+  theme_onsv()
+
+```
+
+#### Transporte de Passageiros  
+
+```{r, echo=FALSE, warning=FALSE}
+
+ggplot(pass_sin, aes(x = idade))+
+  geom_histogram(fill = "orange", breaks = c(0:120))+
+  labs(title = "Histograma das idades - Transporte de Passageiros" ,
+       x = "Idade", y = "Quantidade de vítimas")+
+  geom_vline(xintercept = mean(pass_sin$idade, na.rm = TRUE), color = "red", linetype = "dashed")+
+  theme(
+    axis.title.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.text.x =  element_text(size = 12),
+    axis.text.y =  element_text(size = 12)
+  )+
+  theme_onsv()
+
+```  
+  
+  
+:::  
+
+### Sexo    
+
+<p>Nas tabelas abaixo são apresentadas as porcentagens segundo sexo de cada modalidade de transporte.  
+
+::: panel-tabset  
+
+#### Transporte de Cargas  
+
+```{r, echo=FALSE}
+
+p_sex_carg <- data.frame(
+                      Porcentagem  = c(
+                              round((table(carg_sin$sexo)[3]/sum(table(carg_sin$sexo)))*100,2),
+                              round((table(carg_sin$sexo)[1]/sum(table(carg_sin$sexo)))*100,2),
+                              round((table(carg_sin$sexo)[2]/sum(table(carg_sin$sexo)))*100,2)
+))
+
+
+kable(p_sex_carg)
+
+```
+
+#### Transporte de Passageiros  
+
+```{r, echo=FALSE}
+p_sex_pass <- data.frame(
+                      Porcentagem  = c(
+                              round((table(pass_sin$sexo)[3]/sum(table(pass_sin$sexo)))*100,2),
+                              round((table(pass_sin$sexo)[1]/sum(table(pass_sin$sexo)))*100,2),
+                              round((table(pass_sin$sexo)[2]/sum(table(pass_sin$sexo)))*100,2)
+))
+
+kable(p_sex_pass)
+
+```
+  
+  
+:::  
+
+<p>Pode-se notar que, para o Transporte de Cargas, o sexo masculino representa 92,09% da quantidade dos envolvidos em sinistros. Já para o Transporte de Passageiros, o sexo feminino já representa uma quantidade de 26,42%, enquanto o masculino 70,73% dos casos.
+<p>Os quadros da seção 2.2.3 contém a representação da quantidade de vítimas segundo sexo e faixa etária. Percebe-se que tanto para o Transporte de Cargas quanto o Transporte de Passageiros, há uma quantidade maior de vítimas do sexo masculino na faixa etária de 20 a 40 anos de idade.
+
+### Quadro sexo *x* faixa etária  
+
+```{r, include=FALSE}
+## carg ####
+sex_idade_carg <- carg_sin %>% 
+  group_by(sexo, faixa_etaria) %>% 
+  summarise(total = n())
+## pass ####
+sex_idade_pass <- pass_sin %>% 
+  group_by(sexo, faixa_etaria) %>% 
+  summarise(total = n())
+
+sex_idade_carg_semNA<- sex_idade_carg[!is.na(sex_idade_carg$faixa_etaria),]
+sex_idade_pass_semNA<- sex_idade_pass[!is.na(sex_idade_pass$faixa_etaria),]
+```
+
+::: panel-tabset  
+
+#### Transporte de Cargas  
+
+```{r, echo=FALSE}
+g12 <- ggplot(sex_idade_carg_semNA %>% 
+                filter(sexo == "feminino"| sexo == "masculino"), 
+              aes(x = faixa_etaria, y = sexo,
+                  label = total, fill = total))+
+  geom_tile()+
+  geom_text(size = 4)+
+  labs(title = "Quantidade de vítimas" ,
+       x = "Faixa etária", y = "Sexo")+
+  scale_fill_distiller(palette = "YlOrRd", direction = 1) +
+  theme(
+    axis.title.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.text.x =  element_text(size = 12),
+    axis.text.y =  element_text(size = 12)
+  )+
+  theme_onsv()
+
+ggplotly(g12, tooltip = "text")
+```
+
+#### Transporte de Passageiros  
+
+```{r, echo=FALSE}
+
+g13 <- ggplot(sex_idade_pass_semNA %>% 
+                filter(sexo == "feminino"| sexo == "masculino"), 
+              aes(x = faixa_etaria, y = sexo,
+                  label = total, fill = total))+
+  geom_tile()+
+  geom_text(size = 4)+
+  labs(title = "Quantidade de vítimas" ,
+       x = "Faixa etária", y = "Sexo")+
+  scale_fill_distiller(palette = "YlOrRd", direction = 1) +
+  theme(
+    axis.title.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.text.x =  element_text(size = 12),
+    axis.text.y =  element_text(size = 12)
+  )+
+  theme_onsv()
+
+ggplotly(g13, tooltip = "text")
+```  
+  
+  
+:::  
+
+### Evolução do número de vítimas   
+
+<p> Os gráficos desta seção permitem observar a evolução da quantidade de vítimas em sinistros no Transporte de Cargas e de Passageiros. Pode-se observar uma diminuição significativa na quantidade de vítimas ilesas ao longo do período de análise. Esta redução especialmente pronunciada se deve à uma mudança nos procedimentos de registro da PRF. Em 2014 foi implantado o e-DAT (Declaração de Acidentes de Trânsito) que pode ser feita pelos próprios envolvidos no sinistro via internet, de modo que a partir deste ano a PRF não realizava mais o registro do boletim de ocorrência convencional (LPAT) no local do sinistro para os sinistros sem vítima, exceto para os seguintes casos: Lesões em outras pessoas envolvidas no mesmo sinistros; Envolvimento de servidores da PRF; Danos a bens públicos não concedidos à iniciativa privada; Danos ao meio ambiente; Condutor inabilitado, com CNH suspensa ou cassada; Vazamento ou derramamento de produto perigoso, avaria nas embalagens dos produtos perigosos fracionados, danos no equipamento de transporte de produto perigoso a granel; Envolvimento de algum condutor que esteja sob influência de substância psicoativa de uso indevido, independentemente do teor ou da forma de constatação; Ocorrência de incêndio; Veículo localizado; e Condutor não localizado. Em razão disso, as análises seguintes conduzidas neste documento levarão em consideração apenas os dados referentes ao período 2019-2023.
+<p>Para demais as classificações houve, de modo geral, uma redução do número de vítimas ao longo do período analisado.   
+
+  
+```{r, include=FALSE}
+## carg ####
+table(carg_sin$estado_fisico)
+n_vit_ano_estfis_carg <- carg_sin %>% 
+  group_by(ano, estado_fisico) %>% 
+  summarise(quantidade = n())
+
+## pass ####
+table(pass_sin$estado_fisico)
+n_vit_ano_estfis_pass <- pass_sin %>% 
+  group_by(ano, estado_fisico) %>% 
+  summarise(quantidade = n())
+```
+
+::: panel-tabset  
+
+#### Transporte de Cargas  
+
+```{r, echo=FALSE}
+g8 <- ggplot(n_vit_ano_estfis_carg, aes(x = ano, y = quantidade, colour = estado_fisico))+
+  geom_line()+
+  labs(x = "Ano", y = "Quantidade de vítimas - Transporte de Cargas")+
+  scale_y_continuous(limits = c(0,75000))+
+  scale_x_continuous(limits = c(2011,2023), breaks = c(2011,2015,2020,2023))+
+  theme(
+    axis.title.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.text.x =  element_text(size = 12),
+    axis.text.y =  element_text(size = 12)
+  )+
+  theme_onsv()
+
+ggplotly(g8)
+```
+
+#### Transporte de Passageiros  
+
+```{r, echo=FALSE}
+
+g9 <- ggplot(n_vit_ano_estfis_pass, aes(x = ano, y = quantidade, colour = estado_fisico))+
+  geom_line()+
+  labs(x = "Ano", y = "Quantidade de vítimas - Transporte de Passageiros")+
+  scale_y_continuous(limits = c(0,75000))+
+  scale_x_continuous(limits = c(2011,2023), breaks = c(2011,2015,2020,2023))+
+  theme(
+    axis.title.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.text.x =  element_text(size = 12),
+    axis.text.y =  element_text(size = 12)
+  )+
+  theme_onsv()
+
+ggplotly(g9)
+```  
+
+:::  
+
+### Severidade do estado das vítimas      
+
+<p> Para avaliar a taxa de severidade ao decorrer dos anos, foi gerado o gráfico 2.2.5.1. A taxa de severidade representa a soma entre os "feridos graves" mais os "mortos" dividido pelo total de sinistros. Para o Transporte de Cargas, o ano de 2022 resultou com a maior taxa de severidade (10% das vítimas de todos os sinistros com Transporte de Cargas nesse ano foram classificados como "feridos graves" ou "mortos"), enquanto para o Transporte de Passageiros foi no ano de 2021 com 8,87% dos casos. Nota-se ainda que no Transporte de Cargas há uma tendência de aumento da severidade, já no Transporte de Passageiros, uma tendência de redução.  
+
+
+#### Evolução da taxa de severidade  
+```{r, include=FALSE}
+## carg ####
+x1 <- n_vit_ano_estfis_carg$quantidade [n_vit_ano_estfis_carg$estado_fisico == "ferido grave"]
+y1 <- n_vit_ano_estfis_carg$quantidade [n_vit_ano_estfis_carg$estado_fisico == "morto"]
+z1 <- n_vit_ano_estfis_carg %>% 
+  group_by(ano) %>% 
+  summarise(total = sum(quantidade))
+
+taxa_sev_carg <- data.frame(ano = c(2011:2023),
+                            severidade = (x1+y1)/z1[,2], 
+                            grupo = "Transporte de Cargas")
+## pass ####
+x2 <- n_vit_ano_estfis_pass$quantidade [n_vit_ano_estfis_pass$estado_fisico == "ferido grave"]
+y2 <- n_vit_ano_estfis_pass$quantidade [n_vit_ano_estfis_pass$estado_fisico == "morto"]
+z2 <- n_vit_ano_estfis_pass %>% 
+  group_by(ano) %>% 
+  summarise(total = sum(quantidade))
+
+taxa_sev_pass <- data.frame(ano = c(2011:2023),
+                            severidade = (x2+y2)/z2[,2],
+                            grupo = "Transporte de Passageiros")
+
+taxa_sev <- bind_rows(taxa_sev_carg,taxa_sev_pass)
+```  
+
+```{r, echo=FALSE}
+g10 <- ggplot(filter(taxa_sev, ano %in% c("2019","2020","2021","2022","2023"))
+              , aes(x = ano,y = total, colour = grupo))+
+  geom_line()+
+  theme_onsv()+
+  labs(x = "Ano", y = "Taxa de severidade")+
+  scale_x_continuous(limits = c(2019,2023))+
+  theme(
+    axis.title.y = element_text(size = 14),
+    axis.title.x = element_text(size = 14),
+    axis.text.x =  element_text(size = 12),
+    axis.text.y =  element_text(size = 12)
+  )+
+  theme_onsv()
+
+
+ggplotly(g10)
+```

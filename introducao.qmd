@@ -1,0 +1,28 @@
+<style>
+p {
+  text-align: justify;  
+  text-indent: 20px;   
+}
+</style>  
+
+# Introdução  
+
+***  
+
+<p>De acordo com o institucional da Polícia Rodoviária Federal (PRF),  
+
+> “Atualmente, a Polícia Rodoviária Federal tem sob sua responsabilidade a segurança viária e a prevenção e repressão qualificada ao crime em mais de 75 mil quilômetros de rodovias e estradas federais em todos os estados brasileiros e nas áreas de interesse da União”.   
+
+<p>No que compete à responsabilidade com a segurança viária, a PRF disponibiliza uma base de dados que consta as informações relativas aos sinistros ocorridos em rodovias federais que vem sendo utilizada por diversas instituições interessadas na produção de conteúdos capazes de auxiliar na redução do número de mortos e feridos no trânsito brasileiro, como é o caso do Observatório Nacional de Segurança Viária (ONSV).  
+<p>Essa base de dados fornecida pela PRF é relativa às vítimas dos sinistros de trânsito ocorridos em rodovias federais, onde cada observação representa uma vítima do sinistro. Para este estudo, foram utilizados os dados de 2011 até 2023. O presente estudo tem por objetivo apresentar uma análise da sinistralidade no Transporte de Cargas e Passageiros nas rodovias federais brasileiras. A metodologia inclui a realização de análises descritivas e o emprego de técnicas de verificação de associação e correspondência entre um conjunto de variáveis relativas aos sinistros e às vítimas envolvidas.    
+<p>Em razão deste estudo ser específico para o Transporte de Cargas e de Passageiros, foram selecionados apenas os sinistros envolvendo os seguintes tipos de veículos no caso do Transporte de Cargas:   
+	
+  * Caminhão;    
+  * Caminhão-Trator;  
+  * Caminhão-Tanque;  
+  * Reboque.  
+  
+<p>No caso do Transporte de Passageiros foram selecionados:  
+	
+  * Ônibus;    
+  * Micro-ônibus.
